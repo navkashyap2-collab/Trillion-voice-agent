@@ -7,6 +7,8 @@ tool module and registering it here — never editing the conversation loop.
 from dataclasses import dataclass
 from typing import Callable
 
+from .. import settings
+
 
 @dataclass
 class Tool:
@@ -15,9 +17,10 @@ class Tool:
     input_schema: dict
     handler: Callable[[dict], str]
     # Read-only / non-destructive tools are safe to run on their own. Tools
-    # that send, spend, delete, or change a setting are marked unsafe here —
-    # Tier 6 wires this flag into an actual confirmation gate; for now it's
-    # just a plainly-visible declaration of intent per tool.
+    # that send, spend, delete, or change a setting are marked unsafe here,
+    # which jeet/llm.py's confirmation gate (Tier 6) checks before ever
+    # running one. A tool's own safe=False can't be loosened from config —
+    # see requires_confirmation() below — only tightened.
     safe: bool = True
 
 
@@ -49,3 +52,18 @@ def call_tool(name, tool_input):
         return tool.handler(tool_input), False
     except Exception as e:
         return f"'{name}' failed: {e}", True
+
+
+def requires_confirmation(name):
+    """Whether this tool must stop and get an explicit yes before running.
+    True for any tool marked safe=False in code, or one the user has added
+    to config/settings.yaml's extra_confirmation_required — and True for an
+    unrecognized name too, since "we don't know what this does" is exactly
+    the situation that should default to caution, not silent execution.
+    """
+    tool = TOOLS.get(name)
+    if tool is None:
+        return True
+    if not tool.safe:
+        return True
+    return name in (settings.load().get("extra_confirmation_required") or [])

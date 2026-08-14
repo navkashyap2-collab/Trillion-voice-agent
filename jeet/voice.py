@@ -52,6 +52,26 @@ def run():
     def announce_tool(name):
         print(f"\n  ↳ using {name}...", flush=True)
 
+    def confirm_action(name, tool_input):
+        """The Tier 6 confirmation gate's voice-mode UI. Yes/no still goes
+        through the keyboard, not another round of listening — but Jeet
+        speaks a heads-up first so a "hold to talk" reflex doesn't get met
+        with silence and no explanation. Every call is a fresh ask —
+        approving one action never pre-approves the next.
+        """
+        args = ", ".join(f"{k}={v!r}" for k, v in tool_input.items())
+        print(f"\n⚠️  {NAME} wants to run {name}({args}) — this can't easily be undone.")
+        try:
+            speak_stream(iter(["I need you to confirm something on screen before I go on."]), player)
+        except TTSError:
+            pass  # the on-screen prompt below still works even if speech fails
+        try:
+            answer = input("Proceed? [y/N] ").strip().lower()
+        except (EOFError, KeyboardInterrupt):
+            print("(no answer given — treating as no)")
+            return False
+        return answer in ("y", "yes")
+
     print(f"{NAME} is up in voice mode. Hold SPACE to talk, release to send.")
     print("Press SPACE again while Jeet is speaking to interrupt. Ctrl+C to quit.")
     summary = startup_summary()
@@ -95,7 +115,13 @@ def run():
 
             print(f"{NAME}: ", end="", flush=True)
             try:
-                text_gen = run_turn(history, system_prompt, tool_defs, on_tool_use=announce_tool)
+                text_gen = run_turn(
+                    history,
+                    system_prompt,
+                    tool_defs,
+                    on_tool_use=announce_tool,
+                    confirm=confirm_action,
+                )
                 speak_stream(_echo(text_gen), player)
             except LLMError as e:
                 print(f"\n[{NAME} hit a snag: {e}]")

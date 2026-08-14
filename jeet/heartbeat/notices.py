@@ -10,7 +10,7 @@ read-modify-write from either side from clobbering the other's change.
 import threading
 from datetime import datetime
 
-from .. import store
+from .. import audit, store
 
 FILE = "notices.json"
 _lock = threading.Lock()
@@ -35,7 +35,8 @@ def add(check_name, message, level="fyi"):
         }
         notices.append(notice)
         store.save(FILE, notices)
-        return notice
+    audit.log_heartbeat_notice(check_name, level, message)
+    return notice
 
 
 def has_active(check_name):

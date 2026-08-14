@@ -51,5 +51,13 @@ on macOS), it prints exactly what's missing and exits — text mode is unaffecte
   surfaced right at startup, outside quiet hours; everything else waits for you to ask ("what's
   up?"). Nothing is ever lost if you're away when a check fires — restarting the program resumes
   the schedule instead of resetting it or replaying every missed run.
+- **Tier 6 — the rails**: a hard confirmation gate (`jeet/llm.py`) on any tool marked
+  consequential (`jeet/tools/registry.py`'s `safe: False`, plus `config/settings.yaml`'s
+  `extra_confirmation_required` for adding more without touching code) — Jeet states plainly what
+  it's about to do and waits for an explicit yes, every time, in text or voice. Everything it does
+  — tool calls, confirmations asked, heartbeat activity, a running token-usage tally — is written
+  to `data/audit.log`, plain text, human-readable. `pause_heartbeat` is the kill switch: one
+  frictionless way to stop all background activity without tearing anything down.
 
-Next up: Tier 6 (safety rails and config).
+All six tiers of the baseline build are done. See `AGENT.md` for what's next (more tools,
+sub-agents, a face, an always-on host) if you want to keep going.

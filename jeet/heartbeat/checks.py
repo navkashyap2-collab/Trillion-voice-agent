@@ -7,6 +7,16 @@ changes.
 A check's only job is to look, decide, and call notices.add() itself if
 something's worth surfacing — it has full control over the message and
 whether it's "fyi" (calm log) or "urgent" (worth an interruption).
+
+Checks never call jeet.tools.call_tool. This is deliberate, not an
+oversight: a check runs unattended, with no one there to answer a
+confirmation prompt, so it must never be able to trigger a consequential
+(send/spend/delete/config-change) action directly — that would mean
+either blocking forever on an approval nobody can give, or silently
+skipping the confirmation gate entirely. If a check ever wants something
+consequential to happen, the right move is to surface a notice describing
+it and let the user decide in conversation, where jeet/llm.py's
+confirmation gate (Tier 6) applies normally.
 """
 
 from datetime import datetime, timedelta

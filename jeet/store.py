@@ -9,14 +9,20 @@ import json
 import os
 from pathlib import Path
 
+def data_dir():
+    """The resolved data directory, honoring JEET_DATA_DIR — read fresh on
+    every call, not cached at import time, since this module gets imported
+    (via jeet.config -> jeet.memory) before main.py's load_dotenv() runs.
+    Prefer load()/save() for JSON state; this is for callers like the
+    audit log that need to open a file directly.
+    """
+    d = Path(os.environ.get("JEET_DATA_DIR", "data"))
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
 def _path(name):
-    # Read JEET_DATA_DIR fresh on every call, not once at import time — this
-    # module gets imported (via jeet.config -> jeet.memory) before main.py's
-    # load_dotenv() runs, so a module-level constant would never see a
-    # data-dir override set in .env rather than a real shell env var.
-    data_dir = Path(os.environ.get("JEET_DATA_DIR", "data"))
-    data_dir.mkdir(parents=True, exist_ok=True)
-    return data_dir / name
+    return data_dir() / name
 
 
 def load(name, default):
