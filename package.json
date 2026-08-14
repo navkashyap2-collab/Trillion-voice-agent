@@ -1,0 +1,26 @@
+{
+  "name": "smartdial-solution-website",
+  "version": "1.0.0",
+  "description": "Marketing website for Smartdial Solution",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --minify",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navkashyap2-collab/Trillion-voice-agent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navkashyap2-collab/Trillion-voice-agent/issues"
+  },
+  "homepage": "https://github.com/navkashyap2-collab/Trillion-voice-agent#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "playwright-core": "^1.62.1",
+    "tailwindcss": "^4.3.3"
+  }
+}
