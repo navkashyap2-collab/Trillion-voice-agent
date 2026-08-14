@@ -32,5 +32,11 @@ def save(name, data):
         json.dump(data, f, indent=2)
 
 
+def delete(name):
+    path = _path(name)
+    if path.exists():
+        path.unlink()
+
+
 def next_id(items):
     return max((item["id"] for item in items), default=0) + 1

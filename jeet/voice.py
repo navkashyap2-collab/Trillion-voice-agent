@@ -1,9 +1,10 @@
-"""Tier 3: push-to-talk voice, wrapped around the exact same brain as the
-text loop (jeet.llm.run_turn) and the exact same tools. Hold SPACE, speak,
-release — Jeet transcribes, thinks (calling tools as needed), and speaks
-back. The typed interface (jeet.main) is untouched and keeps working
-exactly as before; this is a second front door onto the same brain, not a
-fork of it.
+"""Tier 3 (+4/5): push-to-talk voice, wrapped around the exact same brain
+as the text loop (jeet.llm.run_turn), the exact same tools, the same
+memory-loaded system prompt, and the same background heartbeat. Hold
+SPACE, speak, release — Jeet transcribes, thinks (calling tools as
+needed), and speaks back. The typed interface (jeet.main) is untouched
+and keeps working exactly as before; this is a second front door onto
+the same brain, not a fork of it.
 
 Run with `python -m jeet.voice`.
 """
@@ -11,6 +12,7 @@ Run with `python -m jeet.voice`.
 from dotenv import load_dotenv
 
 from .config import NAME, build_system_prompt
+from .heartbeat import Heartbeat, startup_summary
 from .llm import LLMError, run_turn
 from .tools import anthropic_tool_defs
 
@@ -41,6 +43,9 @@ def run():
     tool_defs = anthropic_tool_defs()
     history = []
 
+    heartbeat = Heartbeat()
+    heartbeat.start()
+
     player = Player()
     push_to_talk = PushToTalk(on_press=player.interrupt)
 
@@ -48,12 +53,17 @@ def run():
         print(f"\n  ↳ using {name}...", flush=True)
 
     print(f"{NAME} is up in voice mode. Hold SPACE to talk, release to send.")
-    print("Press SPACE again while Jeet is speaking to interrupt. Ctrl+C to quit.\n")
+    print("Press SPACE again while Jeet is speaking to interrupt. Ctrl+C to quit.")
+    summary = startup_summary()
+    if summary:
+        print(summary)
+    print()
 
     try:
         push_to_talk.start()
     except Exception as e:
         print(f"Couldn't start listening for the push-to-talk key: {e}")
+        heartbeat.stop()
         return
 
     try:
@@ -102,6 +112,7 @@ def run():
         print(f"\n{NAME}: See you later.")
     finally:
         push_to_talk.stop()
+        heartbeat.stop()
 
 
 if __name__ == "__main__":

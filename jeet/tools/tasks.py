@@ -1,5 +1,7 @@
 """Tasks & reminders — capability #1."""
 
+from datetime import datetime
+
 from .. import store
 from .registry import Tool, register
 
@@ -12,7 +14,12 @@ def _load():
 
 def add_task(tool_input):
     tasks = _load()
-    task = {"id": store.next_id(tasks), "description": tool_input["description"], "done": False}
+    task = {
+        "id": store.next_id(tasks),
+        "description": tool_input["description"],
+        "done": False,
+        "created_at": datetime.now().isoformat(),
+    }
     tasks.append(task)
     store.save(FILE, tasks)
     return f"Added task #{task['id']}: {task['description']}"

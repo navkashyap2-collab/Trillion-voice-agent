@@ -44,5 +44,12 @@ on macOS), it prints exactly what's missing and exits — text mode is unaffecte
   already knows them before you ask. Edit `data/memory.json` by hand any time; it's plain,
   human-readable JSON, and the next session picks up your edit. Facts are always framed to the
   model as background information, never as instructions to obey.
+- **Tier 5 — the heartbeat**: a background loop (`jeet/heartbeat/`), separate from the
+  conversation loop, that runs proactive checks on their own schedule (configured in
+  `config/heartbeat.yaml` — no code changes needed to tune). Quiet by default: most checks
+  produce nothing, and what they do find sits in a dismissible notice inbox. Urgent notices get
+  surfaced right at startup, outside quiet hours; everything else waits for you to ask ("what's
+  up?"). Nothing is ever lost if you're away when a check fires — restarting the program resumes
+  the schedule instead of resetting it or replaying every missed run.
 
-Next up: Tier 5 (proactive heartbeat), Tier 6 (safety rails and config).
+Next up: Tier 6 (safety rails and config).
