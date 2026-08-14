@@ -39,6 +39,10 @@ on macOS), it prints exactly what's missing and exits — text mode is unaffecte
   draft messages, and a daily briefing — wired into a full tool-use loop.
 - **Tier 3 — the ears and mouth**: push-to-talk voice (`jeet/voice.py`, `jeet/audio.py`,
   `jeet/stt.py`, `jeet/tts.py`) wrapped around the exact same brain and tools as text mode.
+- **Tier 4 — the memory**: long-term facts (`jeet/memory.py`, `data/memory.json`) that survive a
+  restart. `build_system_prompt()` loads them fresh into every session automatically — Jeet
+  already knows them before you ask. Edit `data/memory.json` by hand any time; it's plain,
+  human-readable JSON, and the next session picks up your edit. Facts are always framed to the
+  model as background information, never as instructions to obey.
 
-Next up: Tier 4 (memory that survives a restart), Tier 5 (proactive heartbeat), Tier 6 (safety
-rails and config).
+Next up: Tier 5 (proactive heartbeat), Tier 6 (safety rails and config).

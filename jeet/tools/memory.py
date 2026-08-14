@@ -1,49 +1,34 @@
-"""Business memory — capability #2.
+"""Business memory tools — capability #2, the tool-facing half of Tier 4.
 
-This is the storage half of the Tier 4 long-term memory store: durable
-facts Jeet learns about the user and their business, one plain statement
-per entry. Tier 2 exposes it as tools Jeet can call mid-conversation; Tier 4
-is what loads it automatically into the system prompt at the start of every
-session so Jeet "just knows" without being asked to look it up.
+The storage itself lives in jeet/memory.py, which jeet/config.py also reads
+to load these facts into the system prompt at the start of every session.
+These tools are how Jeet manages that same store mid-conversation.
 """
 
-from .. import store
+from .. import memory
 from .registry import Tool, register
-
-FILE = "memory.json"
-
-
-def _load():
-    return store.load(FILE, [])
 
 
 def remember_fact(tool_input):
-    facts = _load()
-    fact = {"id": store.next_id(facts), "text": tool_input["fact"]}
-    facts.append(fact)
-    store.save(FILE, facts)
+    fact = memory.remember(tool_input["fact"])
     return f"Remembered (#{fact['id']}): {fact['text']}"
 
 
 def recall_facts(tool_input):
-    facts = _load()
-    query = (tool_input.get("query") or "").strip().lower()
-    if query:
-        facts = [f for f in facts if query in f["text"].lower()]
+    facts = memory.recall(tool_input.get("query"))
     if not facts:
-        return "No matching facts stored." if query else "Nothing stored yet."
+        return "No matching facts stored." if tool_input.get("query") else "Nothing stored yet."
     return "\n".join(f"#{f['id']}: {f['text']}" for f in facts)
 
 
+def update_fact(tool_input):
+    fact = memory.update(tool_input["fact_id"], tool_input["fact"])
+    return f"Updated #{fact['id']}: {fact['text']}"
+
+
 def forget_fact(tool_input):
-    facts = _load()
-    fact_id = tool_input["fact_id"]
-    for f in facts:
-        if f["id"] == fact_id:
-            facts.remove(f)
-            store.save(FILE, facts)
-            return f"Forgot #{fact_id}: {f['text']}"
-    raise ValueError(f"no stored fact with id {fact_id}")
+    fact = memory.forget(tool_input["fact_id"])
+    return f"Forgot #{fact['id']}: {fact['text']}"
 
 
 register(
@@ -53,7 +38,7 @@ register(
             "Store one durable fact about the user, their business, or their preferences — "
             "a plain single-sentence statement, e.g. 'client Acme Corp pays net-30' or "
             "'prefers morning meetings'. Use for things worth knowing next session, not "
-            "passing chatter."
+            "passing chatter. If a similar fact is already stored, prefer update_fact instead."
         ),
         input_schema={
             "type": "object",
@@ -76,7 +61,8 @@ register(
         description=(
             "Look up remembered facts about the user or their business. Use when the user "
             "asks what you know about a topic, client, or preference, or when it would help "
-            "to check before answering."
+            "to check before answering. Most facts are already in your system prompt at the "
+            "start of the conversation — use this to search, or to see facts added since."
         ),
         input_schema={
             "type": "object",
@@ -88,6 +74,28 @@ register(
             },
         },
         handler=recall_facts,
+        safe=True,
+    )
+)
+
+register(
+    Tool(
+        name="update_fact",
+        description=(
+            "Correct or rewrite an existing remembered fact in place, given its numeric id "
+            "(shown by recall_facts). Use this instead of remember_fact when a stored fact is "
+            "now wrong or out of date, so there's one current fact per topic instead of "
+            "duplicates piling up."
+        ),
+        input_schema={
+            "type": "object",
+            "properties": {
+                "fact_id": {"type": "integer", "description": "The fact's id."},
+                "fact": {"type": "string", "description": "The corrected statement of fact."},
+            },
+            "required": ["fact_id", "fact"],
+        },
+        handler=update_fact,
         safe=True,
     )
 )

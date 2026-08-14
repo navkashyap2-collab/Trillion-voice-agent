@@ -1,12 +1,12 @@
 """Daily briefing — capability #4. Pulls tasks + memory into one summary."""
 
-from .. import store
+from .. import memory, store
 from .registry import Tool, register
 
 
 def brief_me(tool_input):
     tasks = [t for t in store.load("tasks.json", []) if not t["done"]]
-    facts = store.load("memory.json", [])
+    facts = memory.all_facts()
 
     lines = []
     if tasks:

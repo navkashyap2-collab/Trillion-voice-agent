@@ -10,7 +10,7 @@ Run with `python -m jeet.voice`.
 
 from dotenv import load_dotenv
 
-from .config import NAME, SYSTEM_PROMPT
+from .config import NAME, build_system_prompt
 from .llm import LLMError, run_turn
 from .tools import anthropic_tool_defs
 
@@ -37,6 +37,7 @@ def run():
         print(f"Can't start voice mode:\n\n{e}")
         return
 
+    system_prompt = build_system_prompt()
     tool_defs = anthropic_tool_defs()
     history = []
 
@@ -84,7 +85,7 @@ def run():
 
             print(f"{NAME}: ", end="", flush=True)
             try:
-                text_gen = run_turn(history, SYSTEM_PROMPT, tool_defs, on_tool_use=announce_tool)
+                text_gen = run_turn(history, system_prompt, tool_defs, on_tool_use=announce_tool)
                 speak_stream(_echo(text_gen), player)
             except LLMError as e:
                 print(f"\n[{NAME} hit a snag: {e}]")

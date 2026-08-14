@@ -7,7 +7,7 @@ the result into its answer. Ctrl+D / Ctrl+C / "exit" / "quit" to leave.
 
 from dotenv import load_dotenv
 
-from .config import NAME, SYSTEM_PROMPT
+from .config import NAME, build_system_prompt
 from .llm import LLMError, run_turn
 from .tools import anthropic_tool_defs
 
@@ -18,6 +18,7 @@ def announce_tool(name):
 
 def run():
     load_dotenv()
+    system_prompt = build_system_prompt()
     tool_defs = anthropic_tool_defs()
 
     history = []
@@ -41,7 +42,7 @@ def run():
 
         print(f"{NAME}: ", end="", flush=True)
         try:
-            for chunk in run_turn(history, SYSTEM_PROMPT, tool_defs, on_tool_use=announce_tool):
+            for chunk in run_turn(history, system_prompt, tool_defs, on_tool_use=announce_tool):
                 print(chunk, end="", flush=True)
             print()
         except LLMError as e:
