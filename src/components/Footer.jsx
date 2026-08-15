@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SITE, NAV_LINKS } from "../data/site.js";
+import logoMark from "../assets/logo-mark.svg";
 
 export default function Footer() {
   return (
@@ -7,8 +8,9 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Link to="/" className="font-display text-lg font-extrabold tracking-tight text-ink">
-              {SITE.name}
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src={logoMark} alt="" width="32" height="32" className="h-8 w-8" />
+              <span className="font-display text-lg font-extrabold tracking-tight text-ink">{SITE.name}</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
               Qualified commercial cleaning leads, booked straight into your calendar. No lock-in
