@@ -27,15 +27,25 @@ src/
     Marquee.jsx                Infinite scrolling trust-marker strip
     DialCanvas.jsx              Canvas "dial/connection" hero background
     Icon.jsx                    Hand-authored SVG icon set (no icon library)
-    Seo.jsx                     Per-page <title>/meta description
+    Seo.jsx                     Per-page <title>/meta description (client-side)
   data/
     site.js                     Phone/email/service areas, nav links
     pricing.js                  The 3 lead bundles (Starter/Growth/Scale)
+    seoRoutes.js                 Per-route title/description, used by Seo.jsx AND prerender.mjs
   pages/
     Home.jsx, HowItWorks.jsx, Pricing.jsx, WhoWeHelp.jsx, Contact.jsx, NotFound.jsx
+scripts/
+  prerender.mjs           Post-build: writes a real dist/<route>/index.html per route with
+                           correct title/description/OG tags baked in — GitHub Pages serves
+                           static files, so crawlers that don't run JS need this (Seo.jsx's
+                           useEffect alone isn't enough for them).
 public/
   favicon.svg
+  robots.txt, sitemap.xml
 ```
+
+**Adding a new page?** Add the route in `src/App.jsx` and its metadata in `src/data/seoRoutes.js`
+— `npm run build` prerenders it automatically. Also add it to `public/sitemap.xml`.
 
 All animations respect `prefers-reduced-motion` (see `usePrefersReducedMotion` hook) — reduced
 motion disables the canvas animation, marquee scroll, count-up, and scroll reveals in favor of
@@ -66,7 +76,10 @@ npm run preview    # serve the production build locally
   **first** submission after launch triggers a one-time activation email to that inbox — click the
   link to activate delivery. Change `SITE.email` in `src/data/site.js` if leads should go
   elsewhere.
-- **ABN**: the footer has a placeholder note ("ABN pending") — add your real ABN before launch.
+- **ABN**: not currently shown anywhere in the footer — add it once you have one (common practice
+  for AU businesses, not strictly required).
+- **OG image**: `scripts/prerender.mjs` references `/og-image.png` for social share previews —
+  that file doesn't exist yet, add one to `public/` before launch (1200×630px is standard).
 - **Legal pages**: this build doesn't include Privacy Policy / Terms pages — add them if you need
   them (the previous static-site version had placeholder copy for both, worth reusing).
 

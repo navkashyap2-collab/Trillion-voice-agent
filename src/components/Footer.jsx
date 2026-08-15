@@ -51,7 +51,6 @@ export default function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
-          <p>ABN pending &mdash; add your ABN before launch.</p>
         </div>
       </div>
     </footer>
