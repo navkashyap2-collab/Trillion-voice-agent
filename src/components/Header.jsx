@@ -40,7 +40,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-base/80 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link to="/" className="font-display text-lg font-extrabold tracking-tight text-ink">
-          Smartdial<span className="text-accent-strong">.</span>
+          {SITE.name}
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">

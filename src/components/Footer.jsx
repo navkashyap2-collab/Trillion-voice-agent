@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <Link to="/" className="font-display text-lg font-extrabold tracking-tight text-ink">
-              Smartdial<span className="text-accent-strong">.</span>
+              {SITE.name}
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
               Qualified commercial cleaning leads, booked straight into your calendar. No lock-in
