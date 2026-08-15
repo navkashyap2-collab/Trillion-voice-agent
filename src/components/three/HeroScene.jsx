@@ -1,9 +1,10 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Sparkles } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import DialNetwork from "./DialNetwork.jsx";
 
-export default function HeroScene({ reduced = false }) {
+export default function HeroScene({ reduced = false, scrollProgress }) {
   return (
     <Canvas
       dpr={[1, 1.75]}
@@ -16,11 +17,17 @@ export default function HeroScene({ reduced = false }) {
       <ambientLight intensity={0.6} />
 
       <Suspense fallback={null}>
-        <DialNetwork reduced={reduced} />
+        <DialNetwork reduced={reduced} scrollProgress={scrollProgress} />
         {!reduced && (
           <Sparkles count={60} scale={[7, 5, 4]} size={2} speed={0.25} color="#5aa6ff" opacity={0.5} />
         )}
       </Suspense>
+
+      {!reduced && (
+        <EffectComposer multisampling={0}>
+          <Bloom luminanceThreshold={0.15} luminanceSmoothing={0.9} intensity={1.4} mipmapBlur radius={0.7} />
+        </EffectComposer>
+      )}
     </Canvas>
   );
 }

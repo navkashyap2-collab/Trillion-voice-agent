@@ -1,8 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import DialCanvas from "./DialCanvas.jsx";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
-const HeroScene = lazy(() => import("./three/HeroScene.jsx"));
+const MiniScene = lazy(() => import("./three/MiniScene.jsx"));
 
 function hasWebGL() {
   try {
@@ -13,22 +12,20 @@ function hasWebGL() {
   }
 }
 
-export default function Hero3D({ className, scrollProgress }) {
+export default function Mini3D({ variant, className }) {
   const reduced = usePrefersReducedMotion();
-  const [webgl, setWebgl] = useState(null);
+  const [webgl, setWebgl] = useState(false);
 
   useEffect(() => {
     setWebgl(hasWebGL());
   }, []);
 
-  if (webgl === false) {
-    return <DialCanvas className={className} />;
-  }
+  if (!webgl) return null;
 
   return (
     <div className={className}>
-      <Suspense fallback={<DialCanvas className="h-full w-full" />}>
-        {webgl && <HeroScene reduced={reduced} scrollProgress={scrollProgress} />}
+      <Suspense fallback={null}>
+        <MiniScene variant={variant} reduced={reduced} />
       </Suspense>
     </div>
   );

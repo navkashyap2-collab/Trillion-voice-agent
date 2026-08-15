@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import PageTransition from "./components/PageTransition.jsx";
+import MagneticCursor from "./components/MagneticCursor.jsx";
 import Home from "./pages/Home.jsx";
 import HowItWorks from "./pages/HowItWorks.jsx";
 import Pricing from "./pages/Pricing.jsx";
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <div className="flex min-h-dvh flex-col bg-base text-ink">
       <ScrollToTop />
+      <MagneticCursor />
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>

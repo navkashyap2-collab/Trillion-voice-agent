@@ -5,6 +5,7 @@ import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
+import Mini3D from "../components/Mini3D.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
 
@@ -106,17 +107,21 @@ export default function Contact() {
         description="Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads in Melbourne, Sydney or Australia-wide."
       />
 
-      <section className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
-        <Reveal>
-          <p className="eyebrow">Contact</p>
-          <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
-            Let&rsquo;s fill your calendar
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-            Tell us about your cleaning business and we&rsquo;ll get back to you within 1 business
-            day.
-          </p>
-        </Reveal>
+      <section className="relative overflow-hidden">
+        <Mini3D variant="dial" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/40 via-base/60 to-base" />
+        <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
+          <Reveal>
+            <p className="eyebrow">Contact</p>
+            <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
+              Let&rsquo;s fill your calendar
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
+              Tell us about your cleaning business and we&rsquo;ll get back to you within 1 business
+              day.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24 lg:px-8">

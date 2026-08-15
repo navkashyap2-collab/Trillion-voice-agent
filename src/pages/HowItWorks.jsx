@@ -5,6 +5,8 @@ import StatCounter from "../components/StatCounter.jsx";
 import { IconBadge } from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
+import Mini3D from "../components/Mini3D.jsx";
+import Parallax from "../components/Parallax.jsx";
 import { IMAGES } from "../data/images.js";
 
 const STEPS = [
@@ -80,17 +82,21 @@ export default function HowItWorks() {
         description="How Smartdial Solutions turns commercial cleaning prospects into booked appointments on your calendar, step by step."
       />
 
-      <section className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
-        <Reveal>
-          <p className="eyebrow">The process</p>
-          <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
-            Cleaning company appointment setting, done properly
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-            No mystery black box. Here&rsquo;s exactly how a prospect turns into an appointment on
-            your calendar.
-          </p>
-        </Reveal>
+      <section className="relative overflow-hidden">
+        <Mini3D variant="helix" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/40 via-base/60 to-base" />
+        <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
+          <Reveal>
+            <p className="eyebrow">The process</p>
+            <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
+              Cleaning company appointment setting, done properly
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
+              No mystery black box. Here&rsquo;s exactly how a prospect turns into an appointment on
+              your calendar.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24 lg:px-8">
@@ -105,12 +111,14 @@ export default function HowItWorks() {
             >
               <Tilt3D maxTilt={5} className="w-full md:w-1/2">
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
-                  <img
-                    src={step.image.src}
-                    alt={step.image.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+                  <Parallax range={28} className="absolute inset-0">
+                    <img
+                      src={step.image.src}
+                      alt={step.image.alt}
+                      loading="lazy"
+                      className="h-[130%] w-full -translate-y-[15%] object-cover"
+                    />
+                  </Parallax>
                   <div className="absolute inset-0 bg-gradient-to-t from-base/70 via-transparent to-transparent" />
                   <Float range={5} duration={3.2} className="absolute top-5 left-5">
                     <IconBadge name={step.icon} className="border-white/20 bg-base/70 backdrop-blur-sm" />

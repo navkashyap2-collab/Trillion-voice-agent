@@ -6,6 +6,8 @@ import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Icon from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
+import Mini3D from "../components/Mini3D.jsx";
+import Parallax from "../components/Parallax.jsx";
 import { SITE } from "../data/site.js";
 import { IMAGES } from "../data/images.js";
 
@@ -106,17 +108,21 @@ export default function WhoWeHelp() {
         description="Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres in Melbourne, Sydney and Australia-wide."
       />
 
-      <section className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
-        <Reveal>
-          <p className="eyebrow">Who we help</p>
-          <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
-            Built for commercial cleaning, across every segment
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-            We generate leads across the commercial property types that keep cleaning businesses
-            busiest. Tap or hover a card for detail.
-          </p>
-        </Reveal>
+      <section className="relative overflow-hidden">
+        <Mini3D variant="ring" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/40 via-base/60 to-base" />
+        <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
+          <Reveal>
+            <p className="eyebrow">Who we help</p>
+            <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
+              Built for commercial cleaning, across every segment
+            </h1>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
+              We generate leads across the commercial property types that keep cleaning businesses
+              busiest. Tap or hover a card for detail.
+            </p>
+          </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-20 lg:px-8">
@@ -148,12 +154,14 @@ export default function WhoWeHelp() {
             >
               <Tilt3D maxTilt={5} className="w-full md:w-1/2">
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
-                  <img
-                    src={segment.image.src}
-                    alt={segment.image.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+                  <Parallax range={28} className="absolute inset-0">
+                    <img
+                      src={segment.image.src}
+                      alt={segment.image.alt}
+                      loading="lazy"
+                      className="h-[130%] w-full -translate-y-[15%] object-cover"
+                    />
+                  </Parallax>
                   <div className="absolute inset-0 bg-gradient-to-t from-base/70 via-transparent to-transparent" />
                   <Float range={5} duration={3.2} className="absolute top-5 left-5">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-base/70 text-accent-strong backdrop-blur-sm">

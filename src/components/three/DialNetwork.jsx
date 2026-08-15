@@ -33,7 +33,7 @@ function buildLinkGeometry(points, maxDist) {
   return geometry;
 }
 
-export default function DialNetwork({ nodeCount = 46, radius = 2.4, reduced = false }) {
+export default function DialNetwork({ nodeCount = 46, radius = 2.4, reduced = false, scrollProgress }) {
   const groupRef = useRef(null);
   const targetRotation = useRef({ x: 0, y: 0 });
 
@@ -58,25 +58,31 @@ export default function DialNetwork({ nodeCount = 46, radius = 2.4, reduced = fa
       targetRotation.current.x = state.pointer.y * 0.25;
       targetRotation.current.y += (state.pointer.x * 0.4 - targetRotation.current.y) * 0.02;
       groupRef.current.rotation.x += (targetRotation.current.x - groupRef.current.rotation.x) * 0.04;
+
+      const sp = scrollProgress?.get?.() ?? 0;
+      const targetScale = 1 + sp * 0.6;
+      groupRef.current.scale.setScalar(groupRef.current.scale.x + (targetScale - groupRef.current.scale.x) * 0.08);
+      groupRef.current.rotation.z += (sp * 0.5 - groupRef.current.rotation.z) * 0.06;
+      state.camera.position.z = 6.2 + sp * -1.5;
     }
   });
 
   return (
     <group ref={groupRef}>
       <lineSegments geometry={linkGeometry}>
-        <lineBasicMaterial color={ACCENT} transparent opacity={0.35} />
+        <lineBasicMaterial color={ACCENT} transparent opacity={0.4} toneMapped={false} />
       </lineSegments>
 
       <points>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[nodePositions, 3]} />
         </bufferGeometry>
-        <pointsMaterial color={TEAL} size={0.06} sizeAttenuation transparent opacity={0.9} />
+        <pointsMaterial color={TEAL} size={0.06} sizeAttenuation transparent opacity={0.95} toneMapped={false} />
       </points>
 
       <mesh>
         <icosahedronGeometry args={[radius * 0.98, 1]} />
-        <meshBasicMaterial color={ACCENT} wireframe transparent opacity={0.06} />
+        <meshBasicMaterial color={ACCENT} wireframe transparent opacity={0.08} toneMapped={false} />
       </mesh>
     </group>
   );

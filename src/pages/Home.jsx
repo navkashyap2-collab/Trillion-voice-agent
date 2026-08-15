@@ -1,5 +1,6 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import Seo from "../components/Seo.jsx";
 import Hero3D from "../components/Hero3D.jsx";
 import Marquee from "../components/Marquee.jsx";
@@ -7,6 +8,7 @@ import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import { IconBadge } from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
+import Parallax from "../components/Parallax.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
 import { IMAGES } from "../data/images.js";
@@ -72,6 +74,9 @@ function Headline() {
 }
 
 export default function Home() {
+  const heroRef = useRef(null);
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
   return (
     <>
       <Seo
@@ -80,8 +85,11 @@ export default function Home() {
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <Hero3D className="pointer-events-none absolute inset-0 h-full w-full opacity-60" />
+      <section ref={heroRef} className="relative overflow-hidden">
+        <Hero3D
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-60"
+          scrollProgress={heroScroll}
+        />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/45 via-base/55 to-base" />
 
         <div className="relative mx-auto max-w-5xl px-6 pt-28 pb-20 text-center sm:pt-36 sm:pb-28 lg:px-8">
@@ -170,12 +178,14 @@ export default function Home() {
             <Reveal direction="right" className="w-full md:w-1/2">
               <Tilt3D maxTilt={5}>
                 <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
-                  <img
-                    src={IMAGES.cleanerOfficeDusk.src}
-                    alt={IMAGES.cleanerOfficeDusk.alt}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+                  <Parallax range={28} className="absolute inset-0">
+                    <img
+                      src={IMAGES.cleanerOfficeDusk.src}
+                      alt={IMAGES.cleanerOfficeDusk.alt}
+                      loading="lazy"
+                      className="h-[130%] w-full -translate-y-[15%] object-cover"
+                    />
+                  </Parallax>
                   <div className="absolute inset-0 bg-gradient-to-t from-base/60 via-transparent to-transparent" />
                 </div>
               </Tilt3D>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
+import Mini3D from "../components/Mini3D.jsx";
 import { BUNDLES } from "../data/pricing.js";
 
 const FAQS = [
@@ -87,7 +88,10 @@ export default function Pricing() {
         description="Simple per-lead pricing for qualified commercial cleaning leads. Starter, Growth and Scale bundles, no lock-in contracts."
       />
 
-      <section className="mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
+      <section className="relative overflow-hidden">
+        <Mini3D variant="orbit" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/40 via-base/60 to-base" />
+        <div className="relative mx-auto max-w-4xl px-6 pt-24 pb-16 text-center lg:px-8">
         <Reveal>
           <p className="eyebrow">Pricing</p>
           <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
@@ -98,6 +102,7 @@ export default function Pricing() {
             setup fees, no lock-in contracts.
           </p>
         </Reveal>
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16 lg:px-8">
