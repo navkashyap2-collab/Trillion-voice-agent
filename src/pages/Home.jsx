@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Seo from "../components/Seo.jsx";
-import DialCanvas from "../components/DialCanvas.jsx";
+import Hero3D from "../components/Hero3D.jsx";
 import Marquee from "../components/Marquee.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import { IconBadge } from "../components/Icon.jsx";
+import Tilt3D from "../components/Tilt3D.jsx";
+import Float from "../components/Float.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
@@ -71,8 +73,8 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <DialCanvas className="pointer-events-none absolute inset-0 h-full w-full opacity-60" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/20 via-base/60 to-base" />
+        <Hero3D className="pointer-events-none absolute inset-0 h-full w-full opacity-60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/45 via-base/55 to-base" />
 
         <div className="relative mx-auto max-w-5xl px-6 pt-28 pb-20 text-center sm:pt-36 sm:pb-28 lg:px-8">
           <motion.p
@@ -132,10 +134,14 @@ export default function Home() {
           <div className="absolute top-6 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-border-strong to-transparent lg:block" aria-hidden="true" />
           <RevealGroup className="grid gap-8 lg:grid-cols-4" stagger={0.15}>
             {STEPS.map((step, i) => (
-              <RevealItem key={step.title} className="relative panel p-6">
-                <span className="font-display text-sm font-bold text-accent-strong">0{i + 1}</span>
-                <h3 className="mt-3 text-lg font-bold text-ink">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.copy}</p>
+              <RevealItem key={step.title} className="relative">
+                <Tilt3D maxTilt={7} className="h-full">
+                  <div className="panel h-full p-6">
+                    <span className="font-display text-sm font-bold text-accent-strong">0{i + 1}</span>
+                    <h3 className="mt-3 text-lg font-bold text-ink">{step.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.copy}</p>
+                  </div>
+                </Tilt3D>
               </RevealItem>
             ))}
           </RevealGroup>
@@ -153,9 +159,11 @@ export default function Home() {
       <section className="border-t border-white/[0.06] bg-surface/30 py-16">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <RevealGroup className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {TRUST_ITEMS.map((item) => (
+            {TRUST_ITEMS.map((item, i) => (
               <RevealItem key={item.label} className="flex items-center gap-4">
-                <IconBadge name={item.icon} />
+                <Float delay={i * 0.2}>
+                  <IconBadge name={item.icon} />
+                </Float>
                 <p className="text-sm font-medium text-ink">{item.label}</p>
               </RevealItem>
             ))}
@@ -175,24 +183,26 @@ export default function Home() {
         <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3" stagger={0.12}>
           {BUNDLES.map((bundle) => (
             <RevealItem key={bundle.id}>
-              <div
-                className={`panel flex h-full flex-col p-6 transition-transform duration-300 hover:-translate-y-1 ${
-                  bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(47,140,255,0.35)]" : ""
-                }`}
-              >
-                {bundle.featured && (
-                  <span className="mb-3 inline-flex w-fit items-center rounded-full bg-gradient-to-r from-accent to-teal px-3 py-1 text-xs font-semibold text-base">
-                    Best value
-                  </span>
-                )}
-                <h3 className="font-display text-lg font-bold text-ink">{bundle.name}</h3>
-                <p className="mt-1 text-sm text-ink-muted">{bundle.leads} leads</p>
-                <p className="mt-4 font-display text-3xl font-extrabold text-ink">
-                  ${bundle.total}
-                  <span className="text-sm font-medium text-ink-faint"> total</span>
-                </p>
-                <p className="text-xs text-ink-faint">${bundle.pricePerLead}/lead</p>
-              </div>
+              <Tilt3D maxTilt={8} className="h-full">
+                <div
+                  className={`panel flex h-full flex-col p-6 ${
+                    bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(47,140,255,0.35)]" : ""
+                  }`}
+                >
+                  {bundle.featured && (
+                    <span className="mb-3 inline-flex w-fit items-center rounded-full bg-gradient-to-r from-accent to-teal px-3 py-1 text-xs font-semibold text-base">
+                      Best value
+                    </span>
+                  )}
+                  <h3 className="font-display text-lg font-bold text-ink">{bundle.name}</h3>
+                  <p className="mt-1 text-sm text-ink-muted">{bundle.leads} leads</p>
+                  <p className="mt-4 font-display text-3xl font-extrabold text-ink">
+                    ${bundle.total}
+                    <span className="text-sm font-medium text-ink-faint"> total</span>
+                  </p>
+                  <p className="text-xs text-ink-faint">${bundle.pricePerLead}/lead</p>
+                </div>
+              </Tilt3D>
             </RevealItem>
           ))}
         </RevealGroup>

@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
+import Tilt3D from "../components/Tilt3D.jsx";
 import { BUNDLES } from "../data/pricing.js";
 
 function BundleCard({ bundle }) {
   return (
+    <Tilt3D className="h-full" maxTilt={9} scale={1.03}>
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -54,6 +56,7 @@ function BundleCard({ bundle }) {
         Choose {bundle.name}
       </Link>
     </motion.div>
+    </Tilt3D>
   );
 }
 

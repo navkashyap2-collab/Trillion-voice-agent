@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
+import Tilt3D from "../components/Tilt3D.jsx";
+import Float from "../components/Float.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
 
@@ -269,10 +271,12 @@ export default function Contact() {
           </Reveal>
 
           <Reveal className="lg:col-span-2" direction="left">
+            <Tilt3D maxTilt={6}>
             <div className="panel p-8">
               <h2 className="font-display text-lg font-bold text-ink">Direct contact</h2>
               <ul className="mt-6 space-y-6">
                 <li className="flex items-start gap-4">
+                  <Float range={4} duration={3}>
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-accent/15 to-teal/10 text-accent-strong">
                     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                       <path
@@ -282,6 +286,7 @@ export default function Contact() {
                       />
                     </svg>
                   </span>
+                  </Float>
                   <div>
                     <p className="text-sm font-semibold text-ink">Call or text</p>
                     <a href={SITE.phoneHref} className="text-sm text-ink-muted transition-colors hover:text-accent-strong">
@@ -290,11 +295,13 @@ export default function Contact() {
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
+                  <Float range={4} duration={3} delay={0.3}>
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-accent/15 to-teal/10 text-accent-strong">
                     <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
                       <path d="M4 5h16v14H4zM4 6l8 7 8-7" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
+                  </Float>
                   <div>
                     <p className="text-sm font-semibold text-ink">Email</p>
                     <a href={SITE.emailHref} className="text-sm text-ink-muted transition-colors hover:text-accent-strong">
@@ -307,6 +314,7 @@ export default function Contact() {
                 We&rsquo;ll get back to you within 1 business day.
               </p>
             </div>
+            </Tilt3D>
           </Reveal>
         </div>
       </section>

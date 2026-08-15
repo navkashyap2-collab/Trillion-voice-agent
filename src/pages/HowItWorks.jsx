@@ -3,6 +3,8 @@ import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
 import StatCounter from "../components/StatCounter.jsx";
 import { IconBadge } from "../components/Icon.jsx";
+import Tilt3D from "../components/Tilt3D.jsx";
+import Float from "../components/Float.jsx";
 
 const STEPS = [
   {
@@ -69,11 +71,15 @@ export default function HowItWorks() {
                 i % 2 === 1 ? "md:flex-row-reverse" : ""
               }`}
             >
-              <IconBadge name={step.icon} className="h-16 w-16 shrink-0 [&>svg]:h-7 [&>svg]:w-7" />
-              <div className="panel flex-1 p-8">
-                <h2 className="font-display text-2xl font-bold text-ink">{step.title}</h2>
-                <p className="mt-3 text-base leading-relaxed text-ink-muted">{step.copy}</p>
-              </div>
+              <Float delay={i * 0.3}>
+                <IconBadge name={step.icon} className="h-16 w-16 shrink-0 [&>svg]:h-7 [&>svg]:w-7" />
+              </Float>
+              <Tilt3D maxTilt={6} className="flex-1">
+                <div className="panel h-full p-8">
+                  <h2 className="font-display text-2xl font-bold text-ink">{step.title}</h2>
+                  <p className="mt-3 text-base leading-relaxed text-ink-muted">{step.copy}</p>
+                </div>
+              </Tilt3D>
             </Reveal>
           ))}
         </div>

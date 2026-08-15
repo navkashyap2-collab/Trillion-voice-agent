@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Icon from "../components/Icon.jsx";
+import Tilt3D from "../components/Tilt3D.jsx";
 import { SITE } from "../data/site.js";
 
 const SEGMENTS = [
@@ -43,38 +44,40 @@ function SegmentCard({ segment }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <button
-      type="button"
-      onClick={() => setFlipped((v) => !v)}
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
-      className="group h-56 w-full [perspective:1200px]"
-      aria-pressed={flipped}
-    >
-      <motion.div
-        className="relative h-full w-full [transform-style:preserve-3d]"
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    <Tilt3D maxTilt={5} glare={false} scale={1.01}>
+      <button
+        type="button"
+        onClick={() => setFlipped((v) => !v)}
+        onMouseEnter={() => setFlipped(true)}
+        onMouseLeave={() => setFlipped(false)}
+        className="group h-56 w-full [perspective:1200px]"
+        aria-pressed={flipped}
       >
-        <div className="panel absolute inset-0 flex flex-col items-start justify-center gap-4 p-6 text-left [backface-visibility:hidden]">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-accent/15 to-teal/10 text-accent-strong">
-            <Icon name={segment.icon} />
-          </div>
-          <div>
-            <h3 className="font-display text-base font-bold text-ink">{segment.name}</h3>
-            <p className="mt-1 text-sm text-ink-muted">{segment.summary}</p>
-          </div>
-        </div>
-
-        <div
-          className="absolute inset-0 flex flex-col justify-center gap-2 rounded-3xl border border-accent-strong/40 bg-gradient-to-br from-surface-2 to-surface p-6 text-left [backface-visibility:hidden]"
-          style={{ transform: "rotateY(180deg)" }}
+        <motion.div
+          className="relative h-full w-full [transform-style:preserve-3d]"
+          animate={{ rotateY: flipped ? 180 : 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-teal">{segment.name}</p>
-          <p className="mt-2 text-sm leading-relaxed text-ink-muted">{segment.detail}</p>
-        </div>
-      </motion.div>
-    </button>
+          <div className="panel absolute inset-0 flex flex-col items-start justify-center gap-4 p-6 text-left [backface-visibility:hidden]">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-accent/15 to-teal/10 text-accent-strong">
+              <Icon name={segment.icon} />
+            </div>
+            <div>
+              <h3 className="font-display text-base font-bold text-ink">{segment.name}</h3>
+              <p className="mt-1 text-sm text-ink-muted">{segment.summary}</p>
+            </div>
+          </div>
+
+          <div
+            className="absolute inset-0 flex flex-col justify-center gap-2 rounded-3xl border border-accent-strong/40 bg-gradient-to-br from-surface-2 to-surface p-6 text-left [backface-visibility:hidden]"
+            style={{ transform: "rotateY(180deg)" }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-teal">{segment.name}</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-muted">{segment.detail}</p>
+          </div>
+        </motion.div>
+      </button>
+    </Tilt3D>
   );
 }
 
