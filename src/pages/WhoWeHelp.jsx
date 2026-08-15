@@ -5,7 +5,9 @@ import Seo from "../components/Seo.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Icon from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
+import Float from "../components/Float.jsx";
 import { SITE } from "../data/site.js";
+import { IMAGES } from "../data/images.js";
 
 const SEGMENTS = [
   {
@@ -13,30 +15,45 @@ const SEGMENTS = [
     name: "Office buildings",
     summary: "Commercial towers and business parks with daily or nightly service needs.",
     detail: "From single-tenant offices to multi-storey towers, we target facilities and office managers who control the cleaning budget.",
+    image: IMAGES.officeBuildingExterior,
+    longCopy:
+      "Office buildings run on schedules — daily bin runs, nightly floor care, weekly deep cleans of shared kitchens and bathrooms. We reach the facilities and office managers who own that budget, in towers and business parks across your service area.",
   },
   {
     icon: "home",
     name: "Strata & body corporate",
     summary: "Common areas, foyers, and shared facilities across residential strata.",
     detail: "We reach strata managers and committees looking to replace or supplement their current cleaning contractor.",
+    image: IMAGES.strataLobby,
+    longCopy:
+      "Strata committees and managers are often unhappy with an existing contractor long before they act on it. We reach out at the right moment — when a lobby, foyer, or shared facility contract is genuinely up for review.",
   },
   {
     icon: "medical",
     name: "Medical & dental clinics",
     summary: "Practices needing hygiene-compliant, scheduled cleaning.",
     detail: "Healthcare cleaning has stricter standards — we qualify prospects who understand and budget for that before you quote.",
+    image: IMAGES.medicalClinic,
+    longCopy:
+      "Clinics need more than a standard commercial clean — hygiene compliance, scheduled after-hours access, and consistency matter more here than almost anywhere else. We qualify for that understanding before a lead ever reaches you.",
   },
   {
     icon: "bag",
     name: "Retail",
     summary: "Shopfronts, showrooms and small retail chains.",
     detail: "Storefronts that need consistent presentation for customers, often with after-hours or early-morning service windows.",
+    image: IMAGES.retailStorefront,
+    longCopy:
+      "A shopfront's presentation is part of the sale for every retailer — smudged glass and dusty floors cost them customers. We target stores and small chains that need consistent, scheduled service around trading hours.",
   },
   {
     icon: "child",
     name: "Childcare & education",
     summary: "Centres and campuses with strict cleanliness standards.",
     detail: "Childcare and education clients prioritise reliability and compliance — exactly the kind of long-term contract worth chasing.",
+    image: IMAGES.childcareClassroom,
+    longCopy:
+      "Childcare centres and schools can't tolerate an unreliable cleaner — compliance and consistency come first. These are exactly the long-term, recurring contracts worth the extra qualification effort.",
   },
 ];
 
@@ -110,6 +127,49 @@ export default function WhoWeHelp() {
             </RevealItem>
           ))}
         </RevealGroup>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-24 lg:px-8">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">A closer look</p>
+          <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
+            What we&rsquo;re actually targeting
+          </h2>
+        </Reveal>
+
+        <div className="mt-16 space-y-20">
+          {SEGMENTS.map((segment, i) => (
+            <Reveal
+              key={segment.name}
+              direction={i % 2 === 0 ? "right" : "left"}
+              className={`flex flex-col items-center gap-10 md:flex-row ${
+                i % 2 === 1 ? "md:flex-row-reverse" : ""
+              }`}
+            >
+              <Tilt3D maxTilt={5} className="w-full md:w-1/2">
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
+                  <img
+                    src={segment.image.src}
+                    alt={segment.image.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-base/70 via-transparent to-transparent" />
+                  <Float range={5} duration={3.2} className="absolute top-5 left-5">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-base/70 text-accent-strong backdrop-blur-sm">
+                      <Icon name={segment.icon} />
+                    </div>
+                  </Float>
+                </div>
+              </Tilt3D>
+
+              <div className="w-full md:w-1/2">
+                <h3 className="font-display text-2xl font-bold text-ink">{segment.name}</h3>
+                <p className="mt-3 text-base leading-relaxed text-ink-muted">{segment.longCopy}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section className="border-y border-white/[0.06] bg-surface/30 py-20">

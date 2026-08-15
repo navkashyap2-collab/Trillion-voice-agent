@@ -9,6 +9,7 @@ import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
+import { IMAGES } from "../data/images.js";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
 const HEADLINE_WORDS = ["Your", "calendar,", "filled", "with", "commercial", "cleaning", "jobs."];
@@ -28,6 +29,13 @@ const TRUST_ITEMS = [
 ];
 
 const MARQUEE_ITEMS = ["No lock-in contracts", "Qualified leads only", "Melbourne & Sydney", "Fast turnaround", "Pay per lead"];
+
+const SEGMENT_PREVIEW = [
+  { name: "Office buildings", image: IMAGES.officeBuildingExterior },
+  { name: "Medical & dental clinics", image: IMAGES.medicalClinic },
+  { name: "Retail", image: IMAGES.retailStorefront },
+  { name: "Strata & body corporate", image: IMAGES.strataLobby },
+];
 
 function Headline() {
   const reduced = usePrefersReducedMotion();
@@ -155,8 +163,53 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* Built for professional results */}
+      <section className="border-t border-white/[0.06] bg-surface/30 py-24">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-12 md:flex-row">
+            <Reveal direction="right" className="w-full md:w-1/2">
+              <Tilt3D maxTilt={5}>
+                <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
+                  <img
+                    src={IMAGES.cleanerOfficeDusk.src}
+                    alt={IMAGES.cleanerOfficeDusk.alt}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-base/60 via-transparent to-transparent" />
+                </div>
+              </Tilt3D>
+            </Reveal>
+
+            <Reveal direction="left" className="w-full md:w-1/2">
+              <p className="eyebrow">Why it works</p>
+              <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
+                We book the job. You still control the quality.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink-muted">
+                We're not a generic lead marketplace reselling the same contact to five
+                competitors. Every appointment is scoped to your service area and your ideal job
+                type before it's ever booked, so you walk in already knowing it's worth your time.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {["One client per lead, per area", "Booked with your actual capacity in mind", "You keep full control of the quote and the job"].map(
+                  (item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm text-ink-muted">
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                        <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
       {/* Trust strip */}
-      <section className="border-t border-white/[0.06] bg-surface/30 py-16">
+      <section className="border-t border-white/[0.06] py-16">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <RevealGroup className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
             {TRUST_ITEMS.map((item, i) => (
@@ -168,6 +221,44 @@ export default function Home() {
               </RevealItem>
             ))}
           </RevealGroup>
+        </div>
+      </section>
+
+      {/* Who we help teaser */}
+      <section className="border-t border-white/[0.06] bg-surface/30 py-24">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">Who we help</p>
+            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
+              Built for commercial cleaning, across every segment
+            </h2>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+            {SEGMENT_PREVIEW.map((segment) => (
+              <RevealItem key={segment.name}>
+                <Tilt3D maxTilt={7} glare={false}>
+                  <div className="relative aspect-3/4 overflow-hidden rounded-2xl border border-border">
+                    <img
+                      src={segment.image.src}
+                      alt={segment.image.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-base/85 via-base/10 to-transparent" />
+                    <p className="absolute bottom-4 left-4 text-sm font-semibold text-white">{segment.name}</p>
+                  </div>
+                </Tilt3D>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+
+          <Reveal className="mt-10 text-center">
+            <Link to="/who-we-help" className="inline-flex items-center gap-1 text-sm font-semibold text-accent-strong hover:underline">
+              See every segment
+              <Icon name="arrow" className="h-4 w-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
 

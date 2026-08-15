@@ -5,6 +5,25 @@ import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import { BUNDLES } from "../data/pricing.js";
 
+const FAQS = [
+  {
+    q: "What exactly counts as a 'qualified' lead?",
+    a: "A prospect who's confirmed a genuine interest in commercial cleaning, fits your service area and job-type preferences, and has agreed to a specific appointment time — not just someone who filled in a form.",
+  },
+  {
+    q: "How are leads delivered?",
+    a: "On a rolling basis as they're qualified, straight onto your calendar with the prospect's details — not dumped as a spreadsheet all at once.",
+  },
+  {
+    q: "What if a lead turns out to be a bad fit?",
+    a: "Tell us. It's useful signal for tightening future qualification, and it's the kind of thing we want to know about, not something you just have to absorb.",
+  },
+  {
+    q: "Is there a contract?",
+    a: "No lock-in contract on any bundle. Buy a bundle, use it, and decide separately whether to buy another.",
+  },
+];
+
 function BundleCard({ bundle }) {
   return (
     <Tilt3D className="h-full" maxTilt={9} scale={1.03}>
@@ -97,7 +116,39 @@ export default function Pricing() {
         </Reveal>
       </section>
 
-      <Reveal as="section" className="border-t border-white/[0.06] py-24">
+      <section className="border-t border-white/[0.06] bg-surface/30 py-24">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <Reveal className="text-center">
+            <p className="eyebrow">Questions</p>
+            <h2 className="mt-3 font-display text-2xl font-bold text-ink sm:text-3xl">Pricing FAQ</h2>
+          </Reveal>
+
+          <div className="mt-10 space-y-4">
+            {FAQS.map((faq) => (
+              <Reveal key={faq.q}>
+                <details className="group panel p-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-ink">
+                    {faq.q}
+                    <svg
+                      className="h-5 w-5 shrink-0 text-ink-faint transition-transform duration-300 group-open:rotate-180"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{faq.a}</p>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Reveal as="section" className="py-24">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <h2 className="text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
             Not sure which bundle fits?
