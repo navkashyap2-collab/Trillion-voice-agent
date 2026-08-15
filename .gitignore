@@ -2,3 +2,4 @@ node_modules/
 *.log
 screenshot.mjs
 __pycache__/
+dist/

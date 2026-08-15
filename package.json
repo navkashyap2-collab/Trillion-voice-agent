@@ -1,26 +1,24 @@
 {
-  "name": "smartdial-solution-website",
+  "name": "smartdial-solutions-website",
   "version": "1.0.0",
-  "description": "Marketing website for Smartdial Solution",
+  "description": "Marketing website for Smartdial Solutions",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --minify",
-    "watch:css": "tailwindcss -i ./src/input.css -o ./assets/css/main.css --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navkashyap2-collab/Trillion-voice-agent.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/navkashyap2-collab/Trillion-voice-agent/issues"
-  },
-  "homepage": "https://github.com/navkashyap2-collab/Trillion-voice-agent#readme",
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "playwright-core": "^1.62.1",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.0.5",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.1"
+  },
+  "dependencies": {
+    "framer-motion": "^13.1.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
   }
 }
