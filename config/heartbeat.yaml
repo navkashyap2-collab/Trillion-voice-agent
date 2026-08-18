@@ -1,0 +1,34 @@
+# Jeet's heartbeat — what to check, how often, and how loud to be about
+# it. Edit this file to tune behavior; no code changes needed. It's
+# reloaded on every tick, so edits apply without restarting Jeet.
+
+# How often the background loop wakes up to see if anything is due.
+# Individual checks still only run on their own interval below.
+poll_interval_seconds: 30
+
+# Non-urgent notices sit quietly in the log during these hours instead of
+# interrupting. Urgent notices found during quiet hours are still held —
+# they're shown as soon as the interface reopens outside this window.
+# 24-hour local time.
+quiet_hours:
+  start: "22:00"
+  end: "07:00"
+
+checks:
+  # A real check: flags open tasks that have been sitting untouched.
+  - name: stale_tasks
+    enabled: true
+    interval_minutes: 60
+    params:
+      stale_after_days: 3
+
+  # Not a real feature — a way to prove the whole heartbeat pipeline
+  # (schedule -> check -> notice -> held-until-you're-back -> dismissible)
+  # works end to end without waiting on a real-world condition. Flip
+  # enabled to true and drop the interval low, then write
+  # data/heartbeat_trigger.json (e.g. {"message": "test"}) to fire it on
+  # purpose. Leave it off for normal use.
+  - name: heartbeat_smoke_test
+    enabled: false
+    interval_minutes: 1
+    params: {}
