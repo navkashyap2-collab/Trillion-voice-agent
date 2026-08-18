@@ -1,4 +1,3 @@
-# Smartdial Solutions — Marketing Website
 # Trillion-voice-agent
 
 **Jeet** — a personal, playful, all-in-one AI collaborator. See `AGENT.md` for the full spec
@@ -62,7 +61,10 @@ on macOS), it prints exactly what's missing and exits — text mode is unaffecte
 
 All six tiers of the baseline build are done. See `AGENT.md` for what's next (more tools,
 sub-agents, a face, an always-on host) if you want to keep going.
-# Smartdial Solution — Marketing Website
+
+---
+
+# Smartdial Solutions — Marketing Website
 
 A React + Tailwind + Framer Motion marketing site for **Smartdial Solutions**, a lead generation
 and appointment-setting service for commercial cleaning companies across Melbourne, Sydney and
