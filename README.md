@@ -1,3 +1,4 @@
+# Smartdial Solutions — Marketing Website
 # Trillion-voice-agent
 
 **Jeet** — a personal, playful, all-in-one AI collaborator. See `AGENT.md` for the full spec
@@ -63,62 +64,93 @@ All six tiers of the baseline build are done. See `AGENT.md` for what's next (mo
 sub-agents, a face, an always-on host) if you want to keep going.
 # Smartdial Solution — Marketing Website
 
-A static, multi-page marketing site for **Smartdial Solution**, a lead generation and appointment
-setting service for cleaning businesses.
+A React + Tailwind + Framer Motion marketing site for **Smartdial Solutions**, a lead generation
+and appointment-setting service for commercial cleaning companies across Melbourne, Sydney and
+Australia-wide.
+
+## Stack
+
+- **React 19** + **React Router 7** (client-side routing, 5 pages)
+- **Tailwind CSS 4** (via `@tailwindcss/vite`, dark "premium agency" theme)
+- **Framer Motion** for page transitions, scroll reveals, hover/tap micro-interactions
+- **Vite** for dev/build
 
 ## Structure
 
 ```
-index.html      Home
-services.html   Services (lead gen + appointment setting)
-pricing.html    Pricing tiers + FAQ
-about.html      About / mission
-contact.html    Contact form
-privacy.html    Privacy policy (placeholder — have a lawyer review)
-terms.html      Terms of service (placeholder — have a lawyer review)
+index.html              SPA entry point
+src/
+  main.jsx               App bootstrap, router basename
+  App.jsx                Routes + page-transition AnimatePresence
+  index.css              Tailwind theme tokens (colors, type, base styles)
+  components/
+    Header.jsx, Footer.jsx     Shared nav/footer
+    PageTransition.jsx         Route change fade/slide
+    Reveal.jsx                 whileInView scroll-reveal helpers
+    StatCounter.jsx            Count-up stat, triggers on scroll
+    Marquee.jsx                Infinite scrolling trust-marker strip
+    DialCanvas.jsx              Canvas "dial/connection" hero background
+    Icon.jsx                    Hand-authored SVG icon set (no icon library)
+    Seo.jsx                     Per-page <title>/meta description (client-side)
+  data/
+    site.js                     Phone/email/service areas, nav links
+    pricing.js                  The 3 lead bundles (Starter/Growth/Scale)
+    seoRoutes.js                 Per-route title/description, used by Seo.jsx AND prerender.mjs
+  pages/
+    Home.jsx, HowItWorks.jsx, Pricing.jsx, WhoWeHelp.jsx, Contact.jsx, NotFound.jsx
+scripts/
+  prerender.mjs           Post-build: writes a real dist/<route>/index.html per route with
+                           correct title/description/OG tags baked in — GitHub Pages serves
+                           static files, so crawlers that don't run JS need this (Seo.jsx's
+                           useEffect alone isn't enough for them).
+public/
+  favicon.svg
+  robots.txt, sitemap.xml
+```
 
-assets/css/main.css   Compiled Tailwind CSS (generated, do not edit directly)
-assets/js/main.js     Mobile nav toggle
-assets/img/           Favicon / logo mark
-src/input.css         Tailwind source (edit this, then rebuild)
+**Adding a new page?** Add the route in `src/App.jsx` and its metadata in `src/data/seoRoutes.js`
+— `npm run build` prerenders it automatically. Also add it to `public/sitemap.xml`.
 
-design-system/smartdial-solution/MASTER.md   Design tokens & rationale (colors, type, patterns)
+All animations respect `prefers-reduced-motion` (see `usePrefersReducedMotion` hook) — reduced
+motion disables the canvas animation, marquee scroll, count-up, and scroll reveals in favor of
+static, immediately-visible content.
+
+## Local development
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # production build to dist/
+npm run preview    # serve the production build locally
 ```
 
 ## Editing content
 
-Each page is plain HTML — open it directly and edit the text/markup. There's no templating
-step, so shared elements (nav, footer) are duplicated across pages; if you change one, update
-the others to match.
-
-## Editing styles
-
-Styling is Tailwind CSS, compiled from `src/input.css` into `assets/css/main.css`.
-
-```bash
-npm install          # first time only
-npm run build:css    # one-off build
-npm run watch:css     # rebuild on save while you work
-```
-
-Don't hand-edit `assets/css/main.css` — it's generated and will be overwritten.
+- **Copy**: edit directly in the relevant file under `src/pages/`.
+- **Pricing**: `src/data/pricing.js` — the Home page teaser and the Pricing page both read from
+  this file, so it only needs updating in one place.
+- **Contact/phone/email**: `src/data/site.js`.
+- **Colors/type**: `src/index.css` — the `@theme` block at the top defines every color and font
+  token used across the site.
 
 ## Before you launch — things to update
 
-- **Contact form destination**: the form on `contact.html` posts to
-  `https://formsubmit.co/navkashyap2@gmail.com` (a free, no-signup form relay). The **first**
-  submission after launch will land in that inbox as an activation email — click the link to
-  activate delivery. Swap the email in the `action` attribute if leads should go elsewhere.
-- **Displayed email/phone**: `hello@smartdialsolution.com` and `(555) 010-0100` are placeholders
-  (marked with `<!-- TODO -->` comments in `contact.html` and the footer of every page) — replace
-  with your real business email and phone number.
-- **Pricing & legal copy**: `pricing.html` intentionally avoids published dollar amounts (custom
-  quote model) — adjust if you want fixed pricing instead. `privacy.html` and `terms.html` are
-  placeholder legal text, not legal advice — have them reviewed before publishing.
-- **Domain**: copy assumes `smartdialsolution.com`; update if you register a different domain.
+- **Contact form destination**: the form on the Contact page posts to
+  `https://formsubmit.co/ajax/hello@smartdialsolutions.com.au` (a free, no-signup form relay). The
+  **first** submission after launch triggers a one-time activation email to that inbox — click the
+  link to activate delivery. Change `SITE.email` in `src/data/site.js` if leads should go
+  elsewhere.
+- **ABN**: not currently shown anywhere in the footer — add it once you have one (common practice
+  for AU businesses, not strictly required).
+- **OG image**: `scripts/prerender.mjs` references `/og-image.png` for social share previews —
+  that file doesn't exist yet, add one to `public/` before launch (1200×630px is standard).
+- **Legal pages**: this build doesn't include Privacy Policy / Terms pages — add them if you need
+  them (the previous static-site version had placeholder copy for both, worth reusing).
 
 ## Deploying
 
-Any static host works as-is (no server-side code, no build step required at deploy time —
-`assets/css/main.css` is already committed as compiled output): Vercel, Netlify, GitHub Pages,
-Cloudflare Pages, or a plain file upload to any web host.
+Deployed via GitHub Actions to GitHub Pages (`.github/workflows/deploy-pages.yml`) — pushes to
+this branch trigger `npm ci && npm run build`, and the `dist/` output is published. The Vite
+`base` and React Router `basename` are set for this repo's GitHub Pages path
+(`/Trillion-voice-agent/`); update both in `vite.config.js` / `src/main.jsx` if you move to a
+custom domain or a different repo name.
