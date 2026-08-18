@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import { OrbitCluster, NodeRing, DialRing, StepHelix } from "./MiniGeometries.jsx";
 
 const VARIANTS = { orbit: OrbitCluster, ring: NodeRing, dial: DialRing, helix: StepHelix };
@@ -10,7 +9,7 @@ export default function MiniScene({ variant = "orbit", reduced = false, paused =
 
   return (
     <Canvas
-      dpr={[1, 1.5]}
+      dpr={[1, 1.3]}
       gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
       camera={{ position: [0, 0, 5], fov: 45 }}
       frameloop={reduced || paused ? "demand" : "always"}
@@ -21,12 +20,6 @@ export default function MiniScene({ variant = "orbit", reduced = false, paused =
       <Suspense fallback={null}>
         <Geometry reduced={reduced} />
       </Suspense>
-
-      {!reduced && (
-        <EffectComposer multisampling={0}>
-          <Bloom luminanceThreshold={0.15} luminanceSmoothing={0.9} intensity={1.2} mipmapBlur radius={0.6} />
-        </EffectComposer>
-      )}
     </Canvas>
   );
 }
