@@ -4,13 +4,13 @@ import { Sparkles } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import DialNetwork from "./DialNetwork.jsx";
 
-export default function HeroScene({ reduced = false, scrollProgress }) {
+export default function HeroScene({ reduced = false, paused = false, scrollProgress }) {
   return (
     <Canvas
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: false, alpha: true, powerPreference: "low-power" }}
       camera={{ position: [0, 0, 6.2], fov: 45 }}
-      frameloop={reduced ? "demand" : "always"}
+      frameloop={reduced || paused ? "demand" : "always"}
       className="!absolute inset-0"
     >
       <fog attach="fog" args={["#070b14", 5, 9]} />

@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
+import { useInView } from "../hooks/useInView.js";
 
 const MiniScene = lazy(() => import("./three/MiniScene.jsx"));
 
@@ -15,6 +16,7 @@ function hasWebGL() {
 export default function Mini3D({ variant, className }) {
   const reduced = usePrefersReducedMotion();
   const [webgl, setWebgl] = useState(false);
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     setWebgl(hasWebGL());
@@ -23,9 +25,9 @@ export default function Mini3D({ variant, className }) {
   if (!webgl) return null;
 
   return (
-    <div className={className}>
+    <div ref={ref} className={className}>
       <Suspense fallback={null}>
-        <MiniScene variant={variant} reduced={reduced} />
+        <MiniScene variant={variant} reduced={reduced} paused={!inView} />
       </Suspense>
     </div>
   );

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import DialCanvas from "./DialCanvas.jsx";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
+import { useInView } from "../hooks/useInView.js";
 
 const HeroScene = lazy(() => import("./three/HeroScene.jsx"));
 
@@ -16,6 +17,7 @@ function hasWebGL() {
 export default function Hero3D({ className, scrollProgress }) {
   const reduced = usePrefersReducedMotion();
   const [webgl, setWebgl] = useState(null);
+  const [ref, inView] = useInView();
 
   useEffect(() => {
     setWebgl(hasWebGL());
@@ -26,9 +28,9 @@ export default function Hero3D({ className, scrollProgress }) {
   }
 
   return (
-    <div className={className}>
+    <div ref={ref} className={className}>
       <Suspense fallback={<DialCanvas className="h-full w-full" />}>
-        {webgl && <HeroScene reduced={reduced} scrollProgress={scrollProgress} />}
+        {webgl && <HeroScene reduced={reduced} paused={!inView} scrollProgress={scrollProgress} />}
       </Suspense>
     </div>
   );
