@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { SITE, NAV_LINKS } from "../data/site.js";
-import logoMark from "../assets/logo-mark.svg";
+import LogoLockup from "./LogoLockup.jsx";
 
 function NavItem({ to, label }) {
   return (
@@ -40,9 +40,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-base/80 backdrop-blur-lg">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link to="/" className="flex items-center gap-2.5">
-          <img src={logoMark} alt="" width="32" height="32" className="h-8 w-8" />
-          <span className="font-display text-lg font-extrabold tracking-tight text-ink">{SITE.name}</span>
+        <Link to="/" aria-label={SITE.name}>
+          <LogoLockup />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
