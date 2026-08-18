@@ -1,0 +1,10 @@
+# General settings Jeet reads at startup. Edit this file to tune
+# behavior — no code changes needed.
+
+# Extra tool names that require your explicit yes before running, beyond
+# the ones already marked unsafe in code (things that delete data, and —
+# once built — anything that sends a message or spends money). Add a tool
+# name here if you want extra caution around it. This list can only ADD
+# confirmation requirements, never remove one: a tool's own built-in
+# safety flag can't be loosened from a config file.
+extra_confirmation_required: []
