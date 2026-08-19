@@ -1,18 +1,4 @@
-# Secrets
-.env
-
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
-*.egg-info/
-
-# Local data (memory store, logs) — added in later tiers
-data/
-*.log
 node_modules/
 *.log
 screenshot.mjs
-__pycache__/
 dist/

@@ -11,8 +11,7 @@ import { SEO_ROUTES } from "../src/data/seoRoutes.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = join(__dirname, "..", "dist");
-// TODO: switch to https://smartdialsolutions.com.au once the custom domain is live and DNS is pointed here
-const siteUrl = "https://navkashyap2-collab.github.io/Trillion-voice-agent";
+const siteUrl = "https://smartdialsolutions.com.au";
 const siteName = "Smartdial Solutions";
 const ogImage = `${siteUrl}/og-image.png`; // add this file to /public before launch
 

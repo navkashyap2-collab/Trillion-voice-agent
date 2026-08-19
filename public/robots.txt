@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://navkashyap2-collab.github.io/Trillion-voice-agent/sitemap.xml
+Sitemap: https://smartdialsolutions.com.au/sitemap.xml
