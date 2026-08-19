@@ -86,7 +86,12 @@ npm run preview    # serve the production build locally
 ## Deploying
 
 Deployed via GitHub Actions to GitHub Pages (`.github/workflows/deploy-pages.yml`) — pushes to
-this branch trigger `npm ci && npm run build`, and the `dist/` output is published. The Vite
-`base` and React Router `basename` are set for this repo's GitHub Pages path
-(`/Trillion-voice-agent/`); update both in `vite.config.js` / `src/main.jsx` if you move to a
-custom domain or a different repo name.
+this branch trigger `npm ci && npm run build`, and the `dist/` output is published.
+
+The site is served from the custom domain `smartdialsolutions.com.au` (via `public/CNAME`, which
+GitHub Pages picks up automatically), so Vite's `base` and React Router's `basename` are both
+`/` (root). DNS is configured at the registrar (Hostinger): the apex domain needs four `A` records
+pointing at GitHub Pages' IPs (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
+`185.199.111.153`), and `www` needs a `CNAME` record pointing at
+`navkashyap2-collab.github.io`. If you ever move off a custom domain back to the plain
+`github.io/<repo>` URL, delete `public/CNAME` and change `base` back to `/<repo-name>/`.
