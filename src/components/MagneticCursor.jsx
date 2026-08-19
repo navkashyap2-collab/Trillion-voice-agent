@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
 const INTERACTIVE_SELECTOR = 'a, button, [role="button"], summary, input, textarea, select';
@@ -11,10 +11,6 @@ export default function MagneticCursor() {
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const dotX = useSpring(x, { stiffness: 900, damping: 50, mass: 0.2 });
-  const dotY = useSpring(y, { stiffness: 900, damping: 50, mass: 0.2 });
-  const ringX = useSpring(x, { stiffness: 500, damping: 40, mass: 0.35 });
-  const ringY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.35 });
 
   useEffect(() => {
     if (reduced || typeof window === "undefined") return;
@@ -60,12 +56,12 @@ export default function MagneticCursor() {
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-999 h-1.5 w-1.5 rounded-full bg-teal"
-        style={{ x: dotX, y: dotY, translateX: "-50%", translateY: "-50%" }}
+        style={{ x, y, translateX: "-50%", translateY: "-50%" }}
       />
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-998 rounded-full border border-accent-strong/70"
-        style={{ x: ringX, y: ringY, translateX: "-50%", translateY: "-50%" }}
+        style={{ x, y, translateX: "-50%", translateY: "-50%" }}
         animate={{
           width: hovering ? 52 : 30,
           height: hovering ? 52 : 30,
