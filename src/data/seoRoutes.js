@@ -34,4 +34,14 @@ export const SEO_ROUTES = [
     description:
       "Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads in Melbourne, Sydney or Australia-wide.",
   },
+  {
+    path: "/privacy",
+    title: "Privacy Policy",
+    description: "How Smartdial Solutions collects, uses and protects the information you share with us.",
+  },
+  {
+    path: "/terms",
+    title: "Terms of Service",
+    description: "The terms that apply when you engage Smartdial Solutions for commercial cleaning lead generation.",
+  },
 ];

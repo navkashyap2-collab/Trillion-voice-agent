@@ -52,6 +52,14 @@ export default function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
+          <div className="flex items-center gap-6">
+            <Link to="/privacy" className="transition-colors hover:text-ink">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="transition-colors hover:text-ink">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
