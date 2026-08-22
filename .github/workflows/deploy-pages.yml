@@ -2,7 +2,7 @@ name: Deploy site to GitHub Pages
 
 on:
   push:
-    branches: ["claude/install-ui-ux-pro-max-skill-1rk98m"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
