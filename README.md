@@ -72,7 +72,7 @@ npm run preview    # serve the production build locally
 ## Before you launch — things to update
 
 - **Contact form destination**: the form on the Contact page posts to
-  `https://formsubmit.co/ajax/smartdialsolutions@outlook.com` (a free, no-signup form relay). The
+  `https://formsubmit.co/ajax/contact@smartdialsolutions.com.au` (a free, no-signup form relay). The
   **first** submission after launch triggers a one-time activation email to that inbox — click the
   link to activate delivery. Change `SITE.email` in `src/data/site.js` if leads should go
   elsewhere.
