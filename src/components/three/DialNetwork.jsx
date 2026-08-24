@@ -55,8 +55,8 @@ export default function DialNetwork({ nodeCount = 46, radius = 2.4, reduced = fa
 
     if (!reduced) {
       groupRef.current.rotation.y += delta * 0.12;
-      targetRotation.current.x = state.pointer.y * 0.25;
-      targetRotation.current.y += (state.pointer.x * 0.4 - targetRotation.current.y) * 0.02;
+      targetRotation.current.x = state.pointer.y * 0.35;
+      targetRotation.current.y += (state.pointer.x * 0.55 - targetRotation.current.y) * 0.025;
       groupRef.current.rotation.x += (targetRotation.current.x - groupRef.current.rotation.x) * 0.04;
 
       const sp = scrollProgress?.get?.() ?? 0;

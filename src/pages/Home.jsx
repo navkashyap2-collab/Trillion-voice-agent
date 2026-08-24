@@ -9,6 +9,7 @@ import { IconBadge } from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
 import Parallax from "../components/Parallax.jsx";
+import Magnetic from "../components/Magnetic.jsx";
 import { SITE } from "../data/site.js";
 import { BUNDLES } from "../data/pricing.js";
 import { IMAGES } from "../data/images.js";
@@ -74,8 +75,11 @@ function Headline() {
 }
 
 export default function Home() {
+  const reduced = usePrefersReducedMotion();
   const heroRef = useRef(null);
+  const stepsRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const { scrollYProgress: stepsProgress } = useScroll({ target: stepsRef, offset: ["start 0.75", "end 0.35"] });
 
   return (
     <>
@@ -122,13 +126,17 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.85 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
-            <Link to="/pricing" className="btn-accent">
-              Get Leads
-            </Link>
-            <a href={SITE.phoneHref} className="btn-ghost">
-              <Icon name="phone-inline" />
-              Call Now &mdash; {SITE.phone}
-            </a>
+            <Magnetic>
+              <Link to="/pricing" className="btn-accent">
+                Get Leads
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <a href={SITE.phoneHref} className="btn-ghost">
+                <Icon name="phone-inline" />
+                Call Now &mdash; {SITE.phone}
+              </a>
+            </Magnetic>
           </motion.div>
         </div>
       </section>
@@ -146,8 +154,17 @@ export default function Home() {
           </h2>
         </Reveal>
 
-        <div className="relative mt-16">
-          <div className="absolute top-6 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-border-strong to-transparent lg:block" aria-hidden="true" />
+        <div ref={stepsRef} className="relative mt-16">
+          <div className="absolute top-6 right-0 left-0 hidden h-px overflow-hidden bg-border-strong/25 lg:block" aria-hidden="true">
+            {reduced ? (
+              <div className="h-full bg-gradient-to-r from-transparent via-border-strong to-transparent" />
+            ) : (
+              <motion.div
+                className="h-full origin-left bg-gradient-to-r from-accent via-teal to-accent-strong"
+                style={{ scaleX: stepsProgress }}
+              />
+            )}
+          </div>
           <RevealGroup className="grid gap-8 lg:grid-cols-4" stagger={0.15}>
             {STEPS.map((step, i) => (
               <RevealItem key={step.title} className="relative">
@@ -327,12 +344,16 @@ export default function Home() {
             Tell us your service area and we&rsquo;ll show you what a full pipeline looks like.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link to="/pricing" className="btn-accent">
-              Get Leads
-            </Link>
-            <a href={SITE.phoneHref} className="btn-ghost">
-              Call Now &mdash; {SITE.phone}
-            </a>
+            <Magnetic>
+              <Link to="/pricing" className="btn-accent">
+                Get Leads
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <a href={SITE.phoneHref} className="btn-ghost">
+                Call Now &mdash; {SITE.phone}
+              </a>
+            </Magnetic>
           </div>
         </div>
       </Reveal>

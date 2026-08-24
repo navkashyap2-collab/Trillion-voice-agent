@@ -5,6 +5,7 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import PageTransition from "./components/PageTransition.jsx";
 import MagneticCursor from "./components/MagneticCursor.jsx";
+import GlowField from "./components/GlowField.jsx";
 import Home from "./pages/Home.jsx";
 import HowItWorks from "./pages/HowItWorks.jsx";
 import Pricing from "./pages/Pricing.jsx";
@@ -27,22 +28,26 @@ export default function App() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-base text-ink">
-      <ScrollToTop />
-      <MagneticCursor />
-      <Header />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-          <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
-          <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
-          <Route path="/who-we-help" element={<PageTransition><WhoWeHelp /></PageTransition>} />
-          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-          <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
-          <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
-          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-        </Routes>
-      </AnimatePresence>
-      <Footer />
+      <GlowField className="pointer-events-none fixed inset-0 z-0" />
+      <div className="grain-overlay pointer-events-none fixed inset-0 z-30 opacity-70 mix-blend-overlay" aria-hidden="true" />
+      <div className="relative z-10 flex min-h-dvh flex-col">
+        <ScrollToTop />
+        <MagneticCursor />
+        <Header />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
+            <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
+            <Route path="/who-we-help" element={<PageTransition><WhoWeHelp /></PageTransition>} />
+            <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+            <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+            <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
+            <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+          </Routes>
+        </AnimatePresence>
+        <Footer />
+      </div>
     </div>
   );
 }

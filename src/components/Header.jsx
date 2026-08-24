@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { SITE, NAV_LINKS } from "../data/site.js";
 import LogoLockup from "./LogoLockup.jsx";
+import Magnetic from "./Magnetic.jsx";
 
 function NavItem({ to, label }) {
   return (
@@ -54,9 +55,11 @@ export default function Header() {
           <a href={SITE.phoneHref} className="text-sm font-medium text-ink-muted transition-colors hover:text-ink">
             {SITE.phone}
           </a>
-          <Link to="/pricing" className="btn-accent !px-5 !py-2.5 text-xs">
-            Get Leads
-          </Link>
+          <Magnetic strength={0.25}>
+            <Link to="/pricing" className="btn-accent !px-5 !py-2.5 text-xs">
+              Get Leads
+            </Link>
+          </Magnetic>
         </div>
 
         <button
