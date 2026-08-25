@@ -79,7 +79,7 @@ function Headline() {
     <motion.h1
       initial="hidden"
       animate="show"
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.02, delayChildren: 0.05 } } }}
       className="text-balance font-display text-5xl font-extrabold leading-[1.05] text-ink sm:text-6xl lg:text-7xl"
     >
       {HEADLINE_WORDS.map((word, i) => (
@@ -88,7 +88,7 @@ function Headline() {
           className="mr-[0.25em] inline-block"
           variants={{
             hidden: { opacity: 0, y: 24 },
-            show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+            show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
           }}
         >
           {word}
@@ -121,7 +121,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.35 }}
             className="eyebrow"
           >
             The complete growth platform
@@ -134,7 +134,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
+            transition={{ duration: 0.4, delay: 0.25 }}
             className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-muted"
           >
             We find and qualify your prospects, then hand them to a dedicated Virtual Assistant who
@@ -144,7 +144,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.85 }}
+            transition={{ duration: 0.4, delay: 0.35 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Magnetic>
