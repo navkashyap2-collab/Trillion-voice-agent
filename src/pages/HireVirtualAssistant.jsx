@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Seo from "../components/Seo.jsx";
@@ -13,7 +13,11 @@ import { SITE } from "../data/site.js";
 import { IMAGES } from "../data/images.js";
 import {
   VA_SOCIAL_PROOF,
+  HERO_STATS,
+  TOOLS_TRAINED_ON,
   WHAT_VAS_DO,
+  TRAINING_PROCESS,
+  DAY_IN_THE_LIFE,
   COMPARISON,
   ONBOARDING_STEPS,
   VA_PLANS,
@@ -95,10 +99,47 @@ function PlanCard({ plan }) {
               : "border border-border-strong bg-white/[0.02] text-ink group-hover:border-accent-strong group-hover:bg-white/[0.06]"
           }`}
         >
-          Claim Your VA Today
+          Hire Your VA Today
         </a>
       </motion.div>
     </Tilt3D>
+  );
+}
+
+function StickyCta() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      const pastHero = window.scrollY > 700;
+      const nearBottom = window.scrollY + window.innerHeight > document.body.scrollHeight - 500;
+      setVisible(pastHero && !nearBottom);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-white/[0.08] bg-base/90 backdrop-blur-lg"
+        >
+          <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3 lg:px-8">
+            <p className="hidden text-sm font-medium text-ink sm:block">Ready to hire your Sales & Admin VA?</p>
+            <p className="text-sm font-medium text-ink sm:hidden">Ready to hire your VA?</p>
+            <a href="#lead-form" className="btn-accent !px-6 !py-2.5 text-sm whitespace-nowrap">
+              Get Started
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -158,8 +199,8 @@ export default function HireVirtualAssistant() {
   return (
     <>
       <Seo
-        title="Hire a Virtual Assistant"
-        description="Hire pre-vetted, fluent Virtual Assistants trained for cold calling, appointment setting, CRM management and support — plug-and-play for Australian businesses."
+        title="Hire a Sales & Admin Virtual Assistant"
+        description="Plug-and-play Virtual Assistants specialised in cold outreach, appointment setting, CRM management and lead triage — pre-vetted, sales-trained, and Australian market fluent."
       />
 
       {/* Hero */}
@@ -174,36 +215,54 @@ export default function HireVirtualAssistant() {
         />
         <Mini3D variant="orbit" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/10 via-base/55 to-base" />
-        <div className="relative mx-auto flex min-h-[86vh] max-w-4xl flex-col justify-center px-6 pt-24 pb-10 text-center lg:px-8">
+        <div className="relative mx-auto flex min-h-[80vh] max-w-5xl flex-col justify-center px-6 pt-24 pb-10 text-center lg:px-8">
           <Reveal>
-            <p className="eyebrow">Hire a Virtual Assistant</p>
-            <h1 className="mt-6 text-balance font-display text-6xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
-              <span className="text-ink-muted">Stop Drowning in Admin.</span>
+            <p className="eyebrow">Sales & Admin Virtual Assistants</p>
+            <h1 className="mt-6 text-balance font-display text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+              <span className="text-ink-muted">A Dedicated Sales & Admin VA to</span>
               <br />
               <span className="bg-gradient-to-r from-ink via-ink to-teal bg-clip-text text-transparent">
-                Start Closing More Deals.
+                Scale Your Business Without Limits.
               </span>
             </h1>
             <p className="mx-auto mt-8 max-w-2xl text-xl text-ink-muted">
-              Hire pre-vetted, fluent Virtual Assistants trained specifically for cold calling,
-              appointment setting, and lead management.
+              Plug-and-play Virtual Assistants specialised in cold outreach, appointment setting,
+              CRM management, and lead triage.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a href="#lead-form" className="btn-accent !px-9 !py-4 !text-base">
-                Claim Your VA Today
+                Hire Your VA Today
               </a>
-              <a href="#plans" className="btn-ghost !px-9 !py-4 !text-base">
-                View VA Plans
+              <a href="#what-they-do" className="btn-ghost !px-9 !py-4 !text-base">
+                View VA Features
               </a>
             </div>
             <p className="mt-6 flex items-center justify-center gap-2 text-sm text-ink-faint">
               <span aria-hidden="true">👋</span> Free 5-minute consultation — no obligation.
             </p>
           </Reveal>
+
+          <Reveal className="mt-14" direction="up">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {HERO_STATS.map((stat) => (
+                <div key={stat.label} className="panel flex flex-col items-center gap-2 px-4 py-5 text-center">
+                  <Icon name={stat.icon} className="h-5 w-5 text-accent-strong" />
+                  <p className="text-xs font-semibold text-ink-muted">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+
         <Reveal className="relative border-t border-white/[0.06]">
           <Marquee items={VA_SOCIAL_PROOF} />
         </Reveal>
+        <div className="relative border-t border-white/[0.06] bg-surface/30 py-6">
+          <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">
+            Trained across the tools you already use
+          </p>
+          <Marquee items={TOOLS_TRAINED_ON} />
+        </div>
       </section>
 
       {/* Meet your VA */}
@@ -252,9 +311,9 @@ export default function HireVirtualAssistant() {
       </section>
 
       {/* What our VAs do */}
-      <section className="mx-auto max-w-6xl px-6 py-20 lg:px-8">
+      <section id="what-they-do" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-20 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">What our VAs do</p>
+          <p className="eyebrow">Delegate what's holding you back</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
             Delegate the busywork. Keep the deals.
           </h2>
@@ -308,8 +367,39 @@ export default function HireVirtualAssistant() {
         </div>
       </section>
 
-      {/* SmartDial VA vs hiring in-house */}
+      {/* Match & training process */}
       <section className="border-y border-white/[0.06] bg-surface/30 py-20">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">The SmartDial match</p>
+            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
+              Vetted and trained before they ever join you
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">
+              Every VA goes through the same rigorous process before being matched to a client.
+            </p>
+          </Reveal>
+
+          <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
+            {TRAINING_PROCESS.map((item) => (
+              <RevealItem key={item.title}>
+                <Tilt3D maxTilt={6} className="h-full">
+                  <div className="panel flex h-full flex-col items-start gap-4 p-7">
+                    <Float range={4} duration={3.2}>
+                      <IconBadge name={item.icon} />
+                    </Float>
+                    <h3 className="font-display text-base font-bold text-ink">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-ink-muted">{item.copy}</p>
+                  </div>
+                </Tilt3D>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* SmartDial VA vs hiring in-house */}
+      <section className="py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">The comparison</p>
@@ -360,6 +450,41 @@ export default function HireVirtualAssistant() {
         </div>
       </section>
 
+      {/* Day in the life (illustrative) */}
+      <section className="border-y border-white/[0.06] bg-surface/30 py-20">
+        <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">Illustrative example</p>
+            <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
+              What a day could look like
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">
+              A sample of the kind of work your VA handles day to day — this is a walkthrough
+              example, not a live activity log.
+            </p>
+          </Reveal>
+
+          <RevealGroup className="relative mt-14 space-y-4" stagger={0.1}>
+            {DAY_IN_THE_LIFE.map((item) => (
+              <RevealItem key={item.time}>
+                <div className="panel flex items-center gap-5 p-5 sm:p-6">
+                  <Float range={3} duration={3.4}>
+                    <IconBadge name={item.icon} className="h-12 w-12 shrink-0" />
+                  </Float>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="font-display text-base font-bold text-ink">{item.title}</h3>
+                      <span className="text-xs font-semibold text-ink-faint">{item.time}</span>
+                    </div>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-muted">{item.copy}</p>
+                  </div>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
       {/* Onboarding steps */}
       <section className="mx-auto max-w-6xl px-6 py-20 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -383,7 +508,7 @@ export default function HireVirtualAssistant() {
       </section>
 
       {/* Pricing tiers */}
-      <section id="plans" className="border-y border-white/[0.06] bg-surface/30 py-24">
+      <section id="plans" className="scroll-mt-24 border-y border-white/[0.06] bg-surface/30 py-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">VA Plans</p>
@@ -407,7 +532,7 @@ export default function HireVirtualAssistant() {
       </section>
 
       {/* Lead capture form */}
-      <section id="lead-form" className="mx-auto max-w-4xl px-6 py-24 lg:px-8">
+      <section id="lead-form" className="mx-auto max-w-4xl scroll-mt-24 px-6 py-24 pb-32 lg:px-8">
         <Reveal className="text-center">
           <p className="eyebrow">Get started</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
@@ -493,7 +618,7 @@ export default function HireVirtualAssistant() {
                           className={inputClasses}
                         />
                       </Field>
-                      <Field label="Primary need">
+                      <Field label="Primary task needed">
                         <select
                           value={values.need}
                           onChange={(e) => update("need", e.target.value)}
@@ -530,7 +655,7 @@ export default function HireVirtualAssistant() {
 
                     <RevealItem>
                       <button type="submit" disabled={status === "submitting"} className="btn-accent w-full disabled:opacity-60">
-                        {status === "submitting" ? "Sending…" : "Claim Your VA Today"}
+                        {status === "submitting" ? "Sending…" : "Get Started"}
                       </button>
                     </RevealItem>
                   </RevealGroup>
@@ -554,6 +679,8 @@ export default function HireVirtualAssistant() {
           </a>
         </div>
       </Reveal>
+
+      <StickyCta />
     </>
   );
 }
