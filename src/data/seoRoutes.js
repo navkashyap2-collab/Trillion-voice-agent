@@ -36,9 +36,9 @@ export const SEO_ROUTES = [
   },
   {
     path: "/hire-virtual-assistant",
-    title: "Hire a Virtual Assistant",
+    title: "Hire a Sales & Admin Virtual Assistant",
     description:
-      "Hire pre-vetted, fluent Virtual Assistants trained for cold calling, appointment setting, CRM management and support — plug-and-play for Australian businesses.",
+      "Plug-and-play Virtual Assistants specialised in cold outreach, appointment setting, CRM management and lead triage — pre-vetted, sales-trained, and Australian market fluent.",
   },
   {
     path: "/contact",
