@@ -107,4 +107,28 @@
     66% { transform: translate(-20px, 20px); }
     100% { transform: translate(0, 0); }
   }
+
+  /* MagneticCursor's outer ring: position is written straight to `transform`
+     via a ref on every mousemove (no React state, no Framer Motion), so
+     tracking has zero framework overhead between the event and the paint.
+     Only the hover grow/shrink uses a transition, and it's a native CSS
+     transition rather than a JS-driven one for the same reason. */
+  .cursor-ring {
+    width: 30px;
+    height: 30px;
+    opacity: 0.45;
+    background-color: rgba(139, 92, 246, 0);
+    transition:
+      width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cursor-ring--active {
+    width: 52px;
+    height: 52px;
+    opacity: 0.9;
+    background-color: rgba(139, 92, 246, 0.14);
+  }
 }
