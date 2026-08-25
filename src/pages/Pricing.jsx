@@ -33,7 +33,7 @@ function BundleCard({ bundle }) {
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       className={`group relative flex h-full flex-col rounded-3xl border p-8 ${
         bundle.featured
-          ? "border-accent-strong/50 bg-gradient-to-b from-surface-2 to-surface shadow-[0_0_60px_-15px_rgba(47,140,255,0.45)]"
+          ? "border-accent-strong/50 bg-gradient-to-b from-surface-2 to-surface shadow-[0_0_60px_-15px_rgba(139,92,246,0.45)]"
           : "border-border bg-surface/60"
       }`}
     >
@@ -69,7 +69,7 @@ function BundleCard({ bundle }) {
         to={`/contact?bundle=${bundle.id}`}
         className={`mt-8 inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 active:scale-[0.97] ${
           bundle.featured
-            ? "bg-accent text-white shadow-[0_8px_24px_-8px_rgba(47,140,255,0.6)] group-hover:animate-pulse group-hover:bg-accent-strong"
+            ? "bg-accent text-white shadow-[0_8px_24px_-8px_rgba(139,92,246,0.6)] group-hover:animate-pulse group-hover:bg-accent-strong"
             : "border border-border-strong bg-white/[0.02] text-ink group-hover:border-accent-strong group-hover:bg-white/[0.06]"
         }`}
       >

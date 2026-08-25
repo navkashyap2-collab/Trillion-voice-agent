@@ -304,7 +304,7 @@ export default function Home() {
               <Tilt3D maxTilt={8} className="h-full">
                 <div
                   className={`panel flex h-full flex-col p-6 ${
-                    bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(47,140,255,0.35)]" : ""
+                    bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(139,92,246,0.35)]" : ""
                   }`}
                 >
                   {bundle.featured && (

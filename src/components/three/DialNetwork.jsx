@@ -2,8 +2,8 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const ACCENT = "#2f8cff";
-const TEAL = "#38e8e0";
+const ACCENT = "#8b5cf6";
+const TEAL = "#e05fe0";
 
 // Points spread evenly over a sphere (Fibonacci sphere), which reads as a
 // "network" of connection nodes — the dial/connection motif from the 2D hero.

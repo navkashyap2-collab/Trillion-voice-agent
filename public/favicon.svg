@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Smart Dial Solutions logo">
-  <rect width="64" height="64" rx="15" fill="#070B14"/>
+  <rect width="64" height="64" rx="15" fill="#0B0710"/>
   <circle cx="30" cy="34" r="17" stroke="#f4f6fb" stroke-width="4" fill="none"
     stroke-dasharray="97 6" stroke-dashoffset="-2" stroke-linecap="round"/>
   <circle cx="30" cy="34" r="10" fill="none" stroke="#2fae4e" stroke-width="4"/>

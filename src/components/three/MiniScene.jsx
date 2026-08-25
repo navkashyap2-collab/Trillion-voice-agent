@@ -16,7 +16,7 @@ export default function MiniScene({ variant = "orbit", reduced = false, paused =
       frameloop="demand"
       className="!absolute inset-0"
     >
-      <fog attach="fog" args={["#070b14", 4, 7]} />
+      <fog attach="fog" args={["#0b0710", 4, 7]} />
 
       {!reduced && !paused && <FrameLimiter />}
 

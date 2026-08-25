@@ -55,7 +55,7 @@ function PlanCard({ plan }) {
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className={`group relative flex h-full flex-col rounded-3xl border p-8 ${
           plan.featured
-            ? "border-accent-strong/50 bg-gradient-to-b from-surface-2 to-surface shadow-[0_0_60px_-15px_rgba(47,140,255,0.45)]"
+            ? "border-accent-strong/50 bg-gradient-to-b from-surface-2 to-surface shadow-[0_0_60px_-15px_rgba(139,92,246,0.45)]"
             : "border-border bg-surface/60"
         }`}
       >
@@ -91,7 +91,7 @@ function PlanCard({ plan }) {
           href="#lead-form"
           className={`mt-8 inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-300 active:scale-[0.97] ${
             plan.featured
-              ? "bg-accent text-white shadow-[0_8px_24px_-8px_rgba(47,140,255,0.6)] group-hover:animate-pulse group-hover:bg-accent-strong"
+              ? "bg-accent text-white shadow-[0_8px_24px_-8px_rgba(139,92,246,0.6)] group-hover:animate-pulse group-hover:bg-accent-strong"
               : "border border-border-strong bg-white/[0.02] text-ink group-hover:border-accent-strong group-hover:bg-white/[0.06]"
           }`}
         >
@@ -165,38 +165,38 @@ export default function HireVirtualAssistant() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div
-          className="pointer-events-none absolute inset-0 opacity-80"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(60% 50% at 50% 0%, rgba(47,140,255,0.28), transparent 70%), radial-gradient(40% 40% at 85% 15%, rgba(56,232,224,0.18), transparent 70%)",
+              "radial-gradient(75% 60% at 50% 0%, rgba(139,92,246,0.38), transparent 72%), radial-gradient(45% 45% at 88% 10%, rgba(224,95,224,0.22), transparent 70%)",
           }}
           aria-hidden="true"
         />
         <Mini3D variant="orbit" className="pointer-events-none absolute inset-0 h-full w-full opacity-50" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/20 via-base/60 to-base" />
-        <div className="relative mx-auto max-w-4xl px-6 pt-28 pb-10 text-center lg:px-8">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/10 via-base/55 to-base" />
+        <div className="relative mx-auto flex min-h-[86vh] max-w-4xl flex-col justify-center px-6 pt-24 pb-10 text-center lg:px-8">
           <Reveal>
             <p className="eyebrow">Hire a Virtual Assistant</p>
-            <h1 className="mt-5 text-balance font-display text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 text-balance font-display text-6xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
               <span className="text-ink-muted">Stop Drowning in Admin.</span>
               <br />
               <span className="bg-gradient-to-r from-ink via-ink to-teal bg-clip-text text-transparent">
                 Start Closing More Deals.
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-ink-muted">
+            <p className="mx-auto mt-8 max-w-2xl text-xl text-ink-muted">
               Hire pre-vetted, fluent Virtual Assistants trained specifically for cold calling,
               appointment setting, and lead management.
             </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <a href="#lead-form" className="btn-accent">
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <a href="#lead-form" className="btn-accent !px-9 !py-4 !text-base">
                 Claim Your VA Today
               </a>
-              <a href="#plans" className="btn-ghost">
+              <a href="#plans" className="btn-ghost !px-9 !py-4 !text-base">
                 View VA Plans
               </a>
             </div>
-            <p className="mt-5 flex items-center justify-center gap-2 text-sm text-ink-faint">
+            <p className="mt-6 flex items-center justify-center gap-2 text-sm text-ink-faint">
               <span aria-hidden="true">👋</span> Free 5-minute consultation — no obligation.
             </p>
           </Reveal>

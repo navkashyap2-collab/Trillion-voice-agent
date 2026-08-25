@@ -13,7 +13,7 @@ export default function HeroScene({ reduced = false, paused = false, scrollProgr
       frameloop="demand"
       className="!absolute inset-0"
     >
-      <fog attach="fog" args={["#070b14", 5, 9]} />
+      <fog attach="fog" args={["#0b0710", 5, 9]} />
       <ambientLight intensity={0.6} />
 
       {!reduced && !paused && <FrameLimiter />}
@@ -21,7 +21,7 @@ export default function HeroScene({ reduced = false, paused = false, scrollProgr
       <Suspense fallback={null}>
         <DialNetwork reduced={reduced} scrollProgress={scrollProgress} />
         {!reduced && (
-          <Sparkles count={30} scale={[7, 5, 4]} size={2} speed={0.25} color="#5aa6ff" opacity={0.5} />
+          <Sparkles count={30} scale={[7, 5, 4]} size={2} speed={0.25} color="#a78bfa" opacity={0.5} />
         )}
       </Suspense>
     </Canvas>

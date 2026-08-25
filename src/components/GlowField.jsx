@@ -4,9 +4,9 @@ import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 // Static blur + transform-only drift: each blob is painted once and moved
 // on the compositor thread, so this never triggers a repaint on scroll.
 const BLOBS = [
-  { color: "rgba(47,140,255,0.20)", size: 560, top: "-12%", left: "-10%", duration: 26 },
-  { color: "rgba(56,232,224,0.14)", size: 480, top: "48%", left: "82%", duration: 32 },
-  { color: "rgba(90,166,255,0.13)", size: 440, top: "85%", left: "8%", duration: 22 },
+  { color: "rgba(139,92,246,0.20)", size: 560, top: "-12%", left: "-10%", duration: 26 },
+  { color: "rgba(224,95,224,0.14)", size: 480, top: "48%", left: "82%", duration: 32 },
+  { color: "rgba(167,139,250,0.13)", size: 440, top: "85%", left: "8%", duration: 22 },
 ];
 
 export default function GlowField({ className = "" }) {
