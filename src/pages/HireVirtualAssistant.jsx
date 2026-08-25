@@ -230,10 +230,10 @@ export default function HireVirtualAssistant() {
               CRM management, and lead triage.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="#lead-form" className="btn-accent !px-9 !py-4 !text-base">
+              <a href="#lead-form" className="btn-accent !px-9 !py-4 !text-[1rem]">
                 Hire Your VA Today
               </a>
-              <a href="#what-they-do" className="btn-ghost !px-9 !py-4 !text-base">
+              <a href="#what-they-do" className="btn-ghost !px-9 !py-4 !text-[1rem]">
                 View VA Features
               </a>
             </div>
@@ -412,13 +412,13 @@ export default function HireVirtualAssistant() {
             <div className="panel overflow-hidden">
               <div className="grid grid-cols-2 border-b border-border bg-white/[0.02] text-center">
                 <div className="px-4 py-4 sm:px-6">
-                  <span className="inline-flex items-center gap-2 font-display text-sm font-bold text-ink sm:text-base">
+                  <span className="inline-flex items-center gap-2 font-display text-sm font-bold text-ink sm:text-[1rem]">
                     <span className="h-2 w-2 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
                     SmartDial VA
                   </span>
                 </div>
                 <div className="border-l border-border px-4 py-4 sm:px-6">
-                  <span className="font-display text-sm font-bold text-ink-faint sm:text-base">Hiring In-House</span>
+                  <span className="font-display text-sm font-bold text-ink-faint sm:text-[1rem]">Hiring In-House</span>
                 </div>
               </div>
               {COMPARISON.map((row, i) => (

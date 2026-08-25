@@ -12,6 +12,7 @@ export const NAV_LINKS = [
   { to: "/how-it-works", label: "How It Works" },
   { to: "/pricing", label: "Pricing" },
   { to: "/who-we-help", label: "Who We Help" },
+  { to: "/hire-virtual-assistant", label: "Hire a VA" },
   { to: "/contact", label: "Contact" },
 ];
 

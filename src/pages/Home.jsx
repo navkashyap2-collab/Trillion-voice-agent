@@ -282,6 +282,20 @@ export default function Home() {
                     <span className="text-sm font-medium text-ink-faint"> total</span>
                   </p>
                   <p className="text-xs text-ink-faint">${bundle.pricePerLead}/lead</p>
+                  <ul className="mt-4 flex-1 space-y-2">
+                    {bundle.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2 text-xs leading-relaxed text-ink-muted">
+                        <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to={`/contact?bundle=${bundle.id}`}
+                    className="mt-5 inline-flex items-center justify-center rounded-full border border-border-strong bg-white/[0.02] px-5 py-2.5 text-sm font-semibold text-ink transition-all duration-300 hover:border-accent-strong hover:bg-white/[0.06] active:scale-[0.97]"
+                  >
+                    Choose {bundle.name}
+                  </Link>
                 </div>
               </Tilt3D>
             </RevealItem>

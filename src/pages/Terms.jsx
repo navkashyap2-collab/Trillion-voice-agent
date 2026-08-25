@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Seo from "../components/Seo.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { SITE } from "../data/site.js";
@@ -120,6 +121,25 @@ export default function Terms() {
           </p>
         </Section>
       </section>
+
+      <Reveal as="section" className="border-t border-white/[0.06] py-20">
+        <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
+          <h2 className="text-balance font-display text-2xl font-extrabold text-ink sm:text-3xl">
+            Ready to fill your calendar?
+          </h2>
+          <p className="mt-3 text-base text-ink-muted">
+            See our pricing, or get in touch with any questions.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <Link to="/pricing" className="btn-accent">
+              View Pricing
+            </Link>
+            <Link to="/contact" className="btn-ghost">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </Reveal>
     </>
   );
 }

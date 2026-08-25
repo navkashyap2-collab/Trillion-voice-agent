@@ -7,13 +7,16 @@ import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
 import Mini3D from "../components/Mini3D.jsx";
 import { SITE } from "../data/site.js";
-import { BUNDLES } from "../data/pricing.js";
+import { BUNDLES, HYBRID_PACKAGE } from "../data/pricing.js";
+import { VA_PLANS } from "../data/virtualAssistants.js";
 
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${SITE.email}`;
 
-const BUNDLE_OPTIONS = [
+const INTEREST_OPTIONS = [
   { value: "", label: "Not sure yet" },
-  ...BUNDLES.map((b) => ({ value: b.id, label: `${b.name} — ${b.leads} leads ($${b.total})` })),
+  ...BUNDLES.map((b) => ({ value: b.id, label: `Lead Gen — ${b.name} (${b.leads} leads, $${b.total})` })),
+  ...VA_PLANS.map((p) => ({ value: p.id, label: `Virtual Assistant — ${p.name}` })),
+  { value: HYBRID_PACKAGE.id, label: `${HYBRID_PACKAGE.name} (Lead Gen + VA)` },
 ];
 
 function Field({ label, error, children, hint }) {
@@ -43,14 +46,14 @@ const inputClasses =
 
 export default function Contact() {
   const [params] = useSearchParams();
-  const initialBundle = params.get("bundle") ?? "";
+  const initialInterest = params.get("bundle") ?? params.get("interest") ?? "";
 
   const [values, setValues] = useState({
     name: "",
     company: "",
     phone: "",
     email: "",
-    bundle: BUNDLE_OPTIONS.some((o) => o.value === initialBundle) ? initialBundle : "",
+    interest: INTEREST_OPTIONS.some((o) => o.value === initialInterest) ? initialInterest : "",
     message: "",
   });
   const [errors, setErrors] = useState({});
@@ -79,7 +82,7 @@ export default function Contact() {
 
     setStatus("submitting");
     try {
-      const bundleLabel = BUNDLE_OPTIONS.find((o) => o.value === values.bundle)?.label ?? "Not sure yet";
+      const interestLabel = INTEREST_OPTIONS.find((o) => o.value === values.interest)?.label ?? "Not sure yet";
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -88,7 +91,7 @@ export default function Contact() {
           company: values.company,
           phone: values.phone,
           email: values.email,
-          bundle_interest: bundleLabel,
+          interested_in: interestLabel,
           message: values.message,
           _subject: "New lead from Smartdial Solutions website",
         }),
@@ -117,8 +120,8 @@ export default function Contact() {
               Let&rsquo;s fill your calendar
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-              Tell us about your cleaning business and we&rsquo;ll get back to you within 1 business
-              day.
+              Whether it's Lead Gen, a Dedicated Virtual Assistant, or both, tell us what you need
+              and we&rsquo;ll get back to you within 1 business day.
             </p>
           </Reveal>
         </div>
@@ -224,13 +227,13 @@ export default function Contact() {
                       </RevealItem>
 
                       <RevealItem>
-                        <Field label="Bundle interest">
+                        <Field label="I'm interested in">
                           <select
-                            value={values.bundle}
-                            onChange={(e) => update("bundle", e.target.value)}
+                            value={values.interest}
+                            onChange={(e) => update("interest", e.target.value)}
                             className={inputClasses}
                           >
-                            {BUNDLE_OPTIONS.map((opt) => (
+                            {INTEREST_OPTIONS.map((opt) => (
                               <option key={opt.value} value={opt.value}>
                                 {opt.label}
                               </option>
