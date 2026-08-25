@@ -19,7 +19,7 @@ const shellPath = join(distDir, "index.html");
 const shell = readFileSync(shellPath, "utf-8");
 
 function pageHtml(route) {
-  const fullTitle = route.path === "/" ? siteName : `${route.title} | ${siteName}`;
+  const fullTitle = `${route.title} | ${siteName}`;
   const canonical = `${siteUrl}${route.path === "/" ? "" : route.path}`;
 
   let html = shell;

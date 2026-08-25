@@ -105,8 +105,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Lead Generation & Dedicated Virtual Assistants"
-        description="Smartdial Solutions is a unified growth platform: qualified commercial cleaning lead generation plus dedicated Virtual Assistants for cold outreach, CRM and admin."
+        title="Lead Generation & Virtual Assistants"
+        description="Smartdial Solutions: a growth platform combining commercial cleaning lead generation with dedicated Virtual Assistants for cold outreach and admin."
       />
 
       {/* Hero */}
