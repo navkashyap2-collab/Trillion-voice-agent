@@ -7,6 +7,7 @@ import PageTransition from "./components/PageTransition.jsx";
 import MagneticCursor from "./components/MagneticCursor.jsx";
 import GlowField from "./components/GlowField.jsx";
 import Home from "./pages/Home.jsx";
+import LeadGeneration from "./pages/LeadGeneration.jsx";
 import HowItWorks from "./pages/HowItWorks.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import WhoWeHelp from "./pages/WhoWeHelp.jsx";
@@ -17,10 +18,38 @@ import Terms from "./pages/Terms.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  }, [pathname]);
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+      return;
+    }
+
+    // The target page may still be mid page-transition (AnimatePresence
+    // mode="wait" delays mounting the new route until the old one exits),
+    // so the element might not exist in the DOM yet — poll briefly instead
+    // of giving up after one frame.
+    const id = hash.slice(1);
+    let attempts = 0;
+    let timeoutId;
+
+    function tryScroll() {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "instant" in window ? "instant" : "auto" });
+        return;
+      }
+      attempts += 1;
+      if (attempts < 20) {
+        timeoutId = setTimeout(tryScroll, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+      }
+    }
+
+    tryScroll();
+    return () => clearTimeout(timeoutId);
+  }, [pathname, hash]);
   return null;
 }
 
@@ -39,6 +68,7 @@ export default function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/lead-generation" element={<PageTransition><LeadGeneration /></PageTransition>} />
               <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
               <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
               <Route path="/who-we-help" element={<PageTransition><WhoWeHelp /></PageTransition>} />

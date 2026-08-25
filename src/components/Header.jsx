@@ -1,30 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { SITE, NAV_LINKS } from "../data/site.js";
+import { SITE, NAV_LINKS, SERVICES_MENU } from "../data/site.js";
 import LogoLockup from "./LogoLockup.jsx";
 import Magnetic from "./Magnetic.jsx";
 
-function NavItem({ to, label, featured }) {
-  if (featured) {
-    return (
-      <NavLink
-        to={to}
-        end={to === "/"}
-        className={({ isActive }) =>
-          `inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors duration-300 ${
-            isActive
-              ? "border-accent-strong bg-white/[0.06] text-ink"
-              : "border-border-strong bg-white/[0.02] text-ink-muted hover:border-accent-strong hover:text-ink"
-          }`
-        }
-      >
-        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
-        {label}
-      </NavLink>
-    );
-  }
-
+function NavItem({ to, label }) {
   return (
     <NavLink to={to} end={to === "/"} className="group relative shrink-0 whitespace-nowrap px-1 py-2 text-sm font-medium">
       {({ isActive }) => (
@@ -44,11 +25,81 @@ function NavItem({ to, label, featured }) {
   );
 }
 
+function ServicesDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => setOpen(false), [location.pathname, location.hash]);
+
+  useEffect(() => {
+    function handlePointer(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    }
+    function handleKey(e) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", handlePointer);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handlePointer);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, []);
+
+  return (
+    <div ref={ref} className="relative shrink-0" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-1.5 px-1 py-2 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+        aria-expanded={open}
+        aria-haspopup="true"
+      >
+        Services
+        <svg
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute top-full left-1/2 z-50 mt-3 w-72 -translate-x-1/2 rounded-2xl border border-border bg-surface/95 p-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)] backdrop-blur-lg"
+          >
+            {SERVICES_MENU.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                onClick={() => setOpen(false)}
+                className="block rounded-xl px-4 py-3 text-sm font-medium text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-ink"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => setOpen(false), [location.pathname]);
+  useEffect(() => setOpen(false), [location.pathname, location.hash]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -65,7 +116,9 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-4 lg:gap-6 xl:flex" aria-label="Primary">
-          {NAV_LINKS.map((link) => (
+          <NavItem to="/" label="Home" />
+          <ServicesDropdown />
+          {NAV_LINKS.filter((link) => link.to !== "/").map((link) => (
             <NavItem key={link.to} {...link} />
           ))}
         </nav>
@@ -114,20 +167,47 @@ export default function Header() {
             className="overflow-hidden border-t border-white/[0.06] xl:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
-              {NAV_LINKS.map((link) => (
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `rounded-lg px-3 py-3 text-base font-medium ${isActive ? "bg-white/5 text-ink" : "text-ink-muted"}`
+                }
+              >
+                Home
+              </NavLink>
+
+              <details className="group rounded-lg">
+                <summary className="flex cursor-pointer list-none items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink-muted">
+                  Services
+                  <svg
+                    className="h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </summary>
+                <div className="flex flex-col gap-1 py-1 pl-4">
+                  {SERVICES_MENU.map((item) => (
+                    <Link key={item.to} to={item.to} className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink-faint">
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+
+              {NAV_LINKS.filter((link) => link.to !== "/").map((link) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
-                  end={link.to === "/"}
                   className={({ isActive }) =>
-                    `flex items-center gap-2 rounded-lg px-3 py-3 text-base font-medium ${
-                      isActive ? "bg-white/5 text-ink" : "text-ink-muted"
-                    }`
+                    `rounded-lg px-3 py-3 text-base font-medium ${isActive ? "bg-white/5 text-ink" : "text-ink-muted"}`
                   }
                 >
-                  {link.featured && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
-                  )}
                   {link.label}
                 </NavLink>
               ))}

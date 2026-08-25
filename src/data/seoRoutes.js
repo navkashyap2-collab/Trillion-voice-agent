@@ -6,7 +6,13 @@
 export const SEO_ROUTES = [
   {
     path: "/",
-    title: "Commercial Cleaning Leads & Appointment Setting",
+    title: "Lead Generation & Dedicated Virtual Assistants",
+    description:
+      "Smartdial Solutions is a unified growth platform: qualified commercial cleaning lead generation plus dedicated Virtual Assistants for cold outreach, CRM and admin.",
+  },
+  {
+    path: "/lead-generation",
+    title: "Cold Calling & Lead Generation",
     description:
       "Smartdial Solutions generates qualified commercial cleaning leads across Melbourne, Sydney and Australia-wide, and books them straight into your calendar.",
   },

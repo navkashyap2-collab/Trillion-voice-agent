@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { SITE, NAV_LINKS, SERVICES } from "../data/site.js";
+import { SITE, NAV_LINKS, SERVICES_MENU } from "../data/site.js";
 import LogoLockup from "./LogoLockup.jsx";
 
 export default function Footer() {
@@ -20,7 +20,7 @@ export default function Footer() {
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">Services</h2>
             <ul className="mt-4 space-y-3 text-sm">
-              {SERVICES.map((service) => (
+              {SERVICES_MENU.map((service) => (
                 <li key={service.to}>
                   <Link to={service.to} className="text-ink-muted transition-colors hover:text-ink">
                     {service.label}

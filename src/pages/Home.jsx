@@ -5,39 +5,63 @@ import Seo from "../components/Seo.jsx";
 import Hero3D from "../components/Hero3D.jsx";
 import Marquee from "../components/Marquee.jsx";
 import Reveal, { RevealGroup, RevealItem } from "../components/Reveal.jsx";
-import { IconBadge } from "../components/Icon.jsx";
+import Icon, { IconBadge } from "../components/Icon.jsx";
 import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
 import Parallax from "../components/Parallax.jsx";
 import Magnetic from "../components/Magnetic.jsx";
 import { SITE } from "../data/site.js";
-import { BUNDLES } from "../data/pricing.js";
+import { BUNDLES, HYBRID_PACKAGE } from "../data/pricing.js";
 import { IMAGES } from "../data/images.js";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
-const HEADLINE_WORDS = ["Your", "calendar,", "filled", "with", "commercial", "cleaning", "jobs."];
-
-const STEPS = [
-  { title: "Discovery call", copy: "We map your ideal client, service area, and current booking capacity." },
-  { title: "Campaign launch", copy: "We reach commercial cleaning prospects in your patch, consistently." },
-  { title: "Qualify & book", copy: "Interested prospects are qualified and booked into your calendar." },
-  { title: "You close the job", copy: "You run the appointment and win the contract." },
+const HEADLINE_WORDS = [
+  "Scale",
+  "Your",
+  "Pipeline",
+  "with",
+  "Lead",
+  "Gen",
+  "&",
+  "Dedicated",
+  "Virtual",
+  "Assistants",
 ];
 
-const TRUST_ITEMS = [
-  { icon: "shield", label: "No lock-in contracts" },
-  { icon: "target", label: "Qualified leads only" },
-  { icon: "compass", label: "Melbourne & Sydney focus" },
-  { icon: "bolt", label: "Fast turnaround" },
+const MARQUEE_ITEMS = ["Lead Generation", "Dedicated Virtual Assistants", "No Lock-In Contracts", "Australia-Wide", "One Account Manager"];
+
+const ECOSYSTEM_STEPS = [
+  {
+    icon: "target",
+    title: "Lead Gen captures the prospect",
+    copy: "Our team finds and qualifies commercial cleaning prospects, then books them straight into your calendar.",
+    bullets: ["Consistent, ongoing outreach", "Every prospect qualified before booking", "One client per lead, per area"],
+  },
+  {
+    icon: "headset",
+    title: "Your VA manages what happens next",
+    copy: "A dedicated Virtual Assistant handles the follow-up so no booked lead goes cold — CRM, scheduling, and inbox included.",
+    bullets: ["CRM & pipeline kept up to date", "Reschedules and no-shows chased", "Inbox and confirmations handled"],
+  },
 ];
 
-const MARQUEE_ITEMS = ["No lock-in contracts", "Qualified leads only", "Melbourne & Sydney", "Fast turnaround", "Pay per lead"];
-
-const SEGMENT_PREVIEW = [
-  { name: "Office buildings", image: IMAGES.officeBuildingExterior },
-  { name: "Medical & dental clinics", image: IMAGES.medicalClinic },
-  { name: "Retail", image: IMAGES.retailStorefront },
-  { name: "Strata & body corporate", image: IMAGES.strataLobby },
+const SERVICE_TEASERS = [
+  {
+    to: "/lead-generation",
+    eyebrow: "Service 01",
+    title: "Cold Calling & Lead Gen",
+    copy: "Qualified commercial cleaning leads, sourced and booked straight into your calendar. No lock-in contracts.",
+    image: IMAGES.cleanerOfficeDusk,
+    cta: "Explore Lead Gen",
+  },
+  {
+    to: "/hire-virtual-assistant",
+    eyebrow: "Service 02",
+    title: "Dedicated Virtual Assistants",
+    copy: "A pre-vetted, fluent VA trained for cold outreach, appointment setting, CRM management, and admin.",
+    image: IMAGES.vaAtDesk,
+    cta: "Hire a VA",
+  },
 ];
 
 function Headline() {
@@ -55,7 +79,7 @@ function Headline() {
     <motion.h1
       initial="hidden"
       animate="show"
-      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05, delayChildren: 0.1 } } }}
       className="text-balance font-display text-5xl font-extrabold leading-[1.05] text-ink sm:text-6xl lg:text-7xl"
     >
       {HEADLINE_WORDS.map((word, i) => (
@@ -75,17 +99,14 @@ function Headline() {
 }
 
 export default function Home() {
-  const reduced = usePrefersReducedMotion();
   const heroRef = useRef(null);
-  const stepsRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const { scrollYProgress: stepsProgress } = useScroll({ target: stepsRef, offset: ["start 0.75", "end 0.35"] });
 
   return (
     <>
       <Seo
-        title="Commercial Cleaning Leads & Appointment Setting"
-        description="Smartdial Solutions generates qualified commercial cleaning leads across Melbourne, Sydney and Australia-wide, and books them straight into your calendar."
+        title="Lead Generation & Dedicated Virtual Assistants"
+        description="Smartdial Solutions is a unified growth platform: qualified commercial cleaning lead generation plus dedicated Virtual Assistants for cold outreach, CRM and admin."
       />
 
       {/* Hero */}
@@ -103,7 +124,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="eyebrow"
           >
-            Commercial Cleaning Lead Generation
+            The complete growth platform
           </motion.p>
 
           <div className="mt-6">
@@ -116,8 +137,8 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.7 }}
             className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-muted"
           >
-            We find and qualify commercial cleaning prospects, then book them straight into your
-            calendar &mdash; so you spend time cleaning, not cold-calling.
+            We find and qualify your prospects, then hand them to a dedicated Virtual Assistant who
+            books, follows up, and keeps your CRM moving — one team, two services.
           </motion.p>
 
           <motion.div
@@ -127,15 +148,14 @@ export default function Home() {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <Magnetic>
-              <Link to="/pricing" className="btn-accent">
-                Get Leads
+              <Link to="/lead-generation" className="btn-accent">
+                Explore Lead Gen
               </Link>
             </Magnetic>
             <Magnetic>
-              <a href={SITE.phoneHref} className="btn-ghost">
-                <Icon name="phone-inline" />
-                Call Now &mdash; {SITE.phone}
-              </a>
+              <Link to="/hire-virtual-assistant" className="btn-ghost">
+                Hire a VA
+              </Link>
             </Magnetic>
           </motion.div>
         </div>
@@ -145,173 +165,116 @@ export default function Home() {
         <Marquee items={MARQUEE_ITEMS} />
       </div>
 
-      {/* How it works, condensed */}
+      {/* Complete Sales Ecosystem */}
       <section className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">How it works</p>
+          <p className="eyebrow">How the platform works</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            From first call to closed job in four steps
+            A complete sales ecosystem
           </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink-muted">
+            Lead Gen fills the top of your pipeline. Your VA makes sure nothing that comes in ever
+            falls through the cracks.
+          </p>
         </Reveal>
 
-        <div ref={stepsRef} className="relative mt-16">
-          <div className="absolute top-6 right-0 left-0 hidden h-px overflow-hidden bg-border-strong/25 lg:block" aria-hidden="true">
-            {reduced ? (
-              <div className="h-full bg-gradient-to-r from-transparent via-border-strong to-transparent" />
-            ) : (
-              <motion.div
-                className="h-full origin-left bg-gradient-to-r from-accent via-teal to-accent-strong"
-                style={{ scaleX: stepsProgress }}
-              />
-            )}
-          </div>
-          <RevealGroup className="grid gap-8 lg:grid-cols-4" stagger={0.15}>
-            {STEPS.map((step, i) => (
+        <div className="relative mt-16">
+          <RevealGroup className="grid items-stretch gap-8 lg:grid-cols-2" stagger={0.15}>
+            {ECOSYSTEM_STEPS.map((step, i) => (
               <RevealItem key={step.title} className="relative">
-                <Tilt3D maxTilt={7} className="h-full">
-                  <div className="panel h-full p-6">
-                    <span className="font-display text-sm font-bold text-accent-strong">0{i + 1}</span>
-                    <h3 className="mt-3 text-lg font-bold text-ink">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">{step.copy}</p>
+                <Tilt3D maxTilt={5} className="h-full">
+                  <div className="panel flex h-full flex-col gap-4 p-8">
+                    <div className="flex items-center gap-4">
+                      <Float range={4} duration={3.2}>
+                        <IconBadge name={step.icon} />
+                      </Float>
+                      <span className="font-display text-sm font-bold text-accent-strong">Step 0{i + 1}</span>
+                    </div>
+                    <h3 className="font-display text-xl font-bold text-ink">{step.title}</h3>
+                    <p className="text-sm leading-relaxed text-ink-muted">{step.copy}</p>
+                    <ul className="mt-2 space-y-2.5">
+                      {step.bullets.map((bullet) => (
+                        <li key={bullet} className="flex items-start gap-2.5 text-sm text-ink-muted">
+                          <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </Tilt3D>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-
-        <Reveal className="mt-10 text-center">
-          <Link to="/how-it-works" className="inline-flex items-center gap-1 text-sm font-semibold text-accent-strong hover:underline">
-            See the full process
-            <Icon name="arrow" className="h-4 w-4" />
-          </Link>
-        </Reveal>
-      </section>
-
-      {/* Built for professional results */}
-      <section className="border-t border-white/[0.06] bg-surface/30 py-24">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-12 md:flex-row">
-            <Reveal direction="right" className="w-full md:w-1/2">
-              <Tilt3D maxTilt={5}>
-                <div className="relative aspect-4/3 overflow-hidden rounded-3xl border border-border">
-                  <Parallax range={28} className="absolute inset-0">
-                    <img
-                      src={IMAGES.cleanerOfficeDusk.src}
-                      alt={IMAGES.cleanerOfficeDusk.alt}
-                      loading="lazy"
-                      className="h-[130%] w-full -translate-y-[15%] object-cover"
-                    />
-                  </Parallax>
-                  <div className="absolute inset-0 bg-gradient-to-t from-base/60 via-transparent to-transparent" />
-                </div>
-              </Tilt3D>
-            </Reveal>
-
-            <Reveal direction="left" className="w-full md:w-1/2">
-              <p className="eyebrow">Why it works</p>
-              <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-                We book the job. You still control the quality.
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-ink-muted">
-                We're not a generic lead marketplace reselling the same contact to five
-                competitors. Every appointment is scoped to your service area and your ideal job
-                type before it's ever booked, so you walk in already knowing it's worth your time.
-              </p>
-              <ul className="mt-6 space-y-3">
-                {["One client per lead, per area", "Booked with your actual capacity in mind", "You keep full control of the quote and the job"].map(
-                  (item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-ink-muted">
-                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span>{item}</span>
-                    </li>
-                  ),
+                {i === 0 && (
+                  <div
+                    className="absolute top-1/2 -right-4 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border-strong bg-surface-2 text-accent-strong lg:flex"
+                    aria-hidden="true"
+                  >
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </div>
                 )}
-              </ul>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust strip */}
-      <section className="border-t border-white/[0.06] py-16">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <RevealGroup className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {TRUST_ITEMS.map((item, i) => (
-              <RevealItem key={item.label} className="flex items-center gap-4">
-                <Float delay={i * 0.2}>
-                  <IconBadge name={item.icon} />
-                </Float>
-                <p className="text-sm font-medium text-ink">{item.label}</p>
               </RevealItem>
             ))}
           </RevealGroup>
         </div>
       </section>
 
-      {/* Who we help teaser */}
+      {/* Service teasers */}
       <section className="border-t border-white/[0.06] bg-surface/30 py-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow">Who we help</p>
+            <p className="eyebrow">Two services, one team</p>
             <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-              Built for commercial cleaning, across every segment
+              Pick a service, or run both together
             </h2>
           </Reveal>
 
-          <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-            {SEGMENT_PREVIEW.map((segment) => (
-              <RevealItem key={segment.name}>
-                <Tilt3D maxTilt={7} glare={false}>
-                  <div className="relative aspect-3/4 overflow-hidden rounded-2xl border border-border">
-                    <img
-                      src={segment.image.src}
-                      alt={segment.image.alt}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-base/85 via-base/10 to-transparent" />
-                    <p className="absolute bottom-4 left-4 text-sm font-semibold text-white">{segment.name}</p>
-                  </div>
+          <RevealGroup className="mt-14 grid gap-8 lg:grid-cols-2" stagger={0.15}>
+            {SERVICE_TEASERS.map((service) => (
+              <RevealItem key={service.to}>
+                <Tilt3D maxTilt={5} className="h-full">
+                  <Link to={service.to} className="panel group flex h-full flex-col overflow-hidden">
+                    <div className="relative aspect-16/10 overflow-hidden">
+                      <Parallax range={20} className="absolute inset-0">
+                        <img
+                          src={service.image.src}
+                          alt={service.image.alt}
+                          loading="lazy"
+                          className="h-[120%] w-full -translate-y-[8%] object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </Parallax>
+                      <div className="absolute inset-0 bg-gradient-to-t from-base/85 via-base/10 to-transparent" />
+                      <p className="absolute top-4 left-5 text-xs font-semibold uppercase tracking-[0.2em] text-teal">
+                        {service.eyebrow}
+                      </p>
+                    </div>
+                    <div className="flex flex-1 flex-col p-7">
+                      <h3 className="font-display text-xl font-bold text-ink">{service.title}</h3>
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{service.copy}</p>
+                      <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-accent-strong">
+                        {service.cta}
+                        <Icon name="arrow" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
                 </Tilt3D>
               </RevealItem>
             ))}
           </RevealGroup>
-
-          <Reveal className="mt-10 text-center">
-            <Link to="/who-we-help" className="inline-flex items-center gap-1 text-sm font-semibold text-accent-strong hover:underline">
-              See every segment
-              <Icon name="arrow" className="h-4 w-4" />
-            </Link>
-          </Reveal>
         </div>
       </section>
 
-      {/* Pricing teaser */}
-      <section className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+      {/* Packages */}
+      <section id="packages" className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">Pricing</p>
+          <p className="eyebrow">Packages</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            Pay per qualified lead, nothing else
+            Lead Gen, a Dedicated VA, or both together
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3" stagger={0.12}>
+        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
           {BUNDLES.map((bundle) => (
             <RevealItem key={bundle.id}>
               <Tilt3D maxTilt={8} className="h-full">
-                <div
-                  className={`panel flex h-full flex-col p-6 ${
-                    bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(139,92,246,0.35)]" : ""
-                  }`}
-                >
-                  {bundle.featured && (
-                    <span className="mb-3 inline-flex w-fit items-center rounded-full bg-gradient-to-r from-accent to-teal px-3 py-1 text-xs font-semibold text-base">
-                      Best value
-                    </span>
-                  )}
+                <div className="panel flex h-full flex-col p-6">
                   <h3 className="font-display text-lg font-bold text-ink">{bundle.name}</h3>
                   <p className="mt-1 text-sm text-ink-muted">{bundle.leads} leads</p>
                   <p className="mt-4 font-display text-3xl font-extrabold text-ink">
@@ -323,11 +286,37 @@ export default function Home() {
               </Tilt3D>
             </RevealItem>
           ))}
+
+          <RevealItem>
+            <Tilt3D maxTilt={8} className="h-full">
+              <div className="group relative flex h-full flex-col border-accent-strong/50 bg-gradient-to-b from-surface-2 to-surface p-6 shadow-[0_0_50px_-12px_rgba(139,92,246,0.4)] rounded-3xl border">
+                <span className="mb-3 inline-flex w-fit items-center rounded-full bg-gradient-to-r from-accent to-teal px-3 py-1 text-xs font-semibold text-base">
+                  New
+                </span>
+                <h3 className="font-display text-lg font-bold text-ink">{HYBRID_PACKAGE.name}</h3>
+                <p className="mt-1 text-sm text-ink-muted">{HYBRID_PACKAGE.tagline}</p>
+                <ul className="mt-4 flex-1 space-y-2">
+                  {HYBRID_PACKAGE.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-xs leading-relaxed text-ink-muted">
+                      <Icon name="check" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/contact"
+                  className="mt-5 inline-flex items-center justify-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent-strong active:scale-[0.97]"
+                >
+                  Get a Custom Quote
+                </Link>
+              </div>
+            </Tilt3D>
+          </RevealItem>
         </RevealGroup>
 
         <Reveal className="mt-10 text-center">
           <Link to="/pricing" className="btn-ghost">
-            View Full Pricing
+            View Full Lead Gen Pricing
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </Reveal>
@@ -338,44 +327,28 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-teal/10" aria-hidden="true" />
         <div className="relative mx-auto max-w-3xl px-6 py-24 text-center lg:px-8">
           <h2 className="text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            Ready to fill your calendar?
+            Ready to scale your pipeline?
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
-            Tell us your service area and we&rsquo;ll show you what a full pipeline looks like.
+            Start with Lead Gen, add a Dedicated VA, or launch both together.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
-              <Link to="/pricing" className="btn-accent">
-                Get Leads
+              <Link to="/lead-generation" className="btn-accent">
+                Explore Lead Gen
               </Link>
             </Magnetic>
             <Magnetic>
-              <a href={SITE.phoneHref} className="btn-ghost">
-                Call Now &mdash; {SITE.phone}
-              </a>
+              <Link to="/hire-virtual-assistant" className="btn-ghost">
+                Hire a VA
+              </Link>
             </Magnetic>
+            <a href={SITE.phoneHref} className="text-sm font-medium text-ink-muted transition-colors hover:text-ink">
+              or call {SITE.phone}
+            </a>
           </div>
         </div>
       </Reveal>
     </>
-  );
-}
-
-function Icon({ name, className = "h-4 w-4" }) {
-  if (name === "arrow") {
-    return (
-      <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-      <path
-        d="M6.6 10.8c1.4 2.9 3.7 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.3 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.6c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.3 1l-2.2 2.2z"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
