@@ -71,42 +71,29 @@ export const DAY_IN_THE_LIFE = [
   { icon: "headset", time: "3:30 PM", title: "Inbox triage", copy: "Lead replies and follow-ups actioned before they go cold." },
 ];
 
-export const COMPARISON = [
-  {
-    label: "Time to start",
-    smartdial: "Matched and working within 48 hours",
-    inHouse: "Often 6-8 weeks of recruiting, interviewing, and onboarding",
-  },
-  {
-    label: "Cost",
-    smartdial: "One flexible plan, no employment overheads",
-    inHouse: "Full salary, super, leave entitlements, and equipment",
-  },
-  {
-    label: "Sales training",
-    smartdial: "Pre-trained in objection handling & cold outreach",
-    inHouse: "You build the sales training program yourself",
-  },
-  {
-    label: "Phone etiquette",
-    smartdial: "Certified on Australian business phone standards",
-    inHouse: "No guarantee of phone-ready communication skills",
-  },
-  {
-    label: "Oversight",
-    smartdial: "Dedicated account manager included",
-    inHouse: "You manage performance yourself",
-  },
-  {
-    label: "Flexibility",
-    smartdial: "Scale up, down, or pause anytime",
-    inHouse: "Locked into ongoing employment obligations",
-  },
-  {
-    label: "Backup coverage",
-    smartdial: "Continuity covered if your VA is unavailable",
-    inHouse: "No backup if they're sick or leave",
-  },
+export const SMARTDIAL_COLUMN = [
+  { title: "Dedicated Virtual Assistant", copy: "Focused on your business only — not a shared queue or call centre." },
+  { title: "Hire fast: within 48 hours", copy: "Matched and working, not weeks of interviews." },
+  { title: "A fraction of the cost", copy: "No salary, super, leave entitlements, or equipment overheads." },
+  { title: "Sales & admin, covered", copy: "Cold calling, appointment setting, CRM, and inbox in one hire." },
+  { title: "Works your hours", copy: "Matched to your schedule and time zone." },
+  { title: "Handpicked & vetted", copy: "Screened for real sales aptitude, not just English fluency." },
+  { title: "Sales-psychology trained", copy: "Objection handling and cold-outreach technique from day one." },
+  { title: "Easy to scale", copy: "Add, swap, or pause a seat anytime — no lock-in contracts." },
+  { title: "Co-managed by SmartDial", copy: "An account manager oversees quality, so you don't have to." },
+  { title: "Continuously coached", copy: "Calls reviewed and coaching applied on an ongoing basis." },
+];
+
+export const IN_PERSON_COLUMN = [
+  { title: "Slow to hire", copy: "Often 6-8 weeks of recruiting, interviewing, and onboarding." },
+  { title: "Full employment cost", copy: "Salary, super, leave entitlements, and equipment on top." },
+  { title: "You build the training", copy: "Sales technique and phone etiquette taught from scratch." },
+  { title: "No skill guarantee", copy: "No guarantee of phone-ready communication skills." },
+  { title: "Hard to replace", copy: "Starts the hiring process over from zero if they leave." },
+  { title: "Not already trained", copy: "On your tools, your CRM, or your sales process." },
+  { title: "You manage performance", copy: "Reviews, coaching, and quality control fall on you." },
+  { title: "You handle all HR", copy: "Recruiting, payroll, documentation, and compliance." },
+  { title: "No backup coverage", copy: "No cover if they're sick, on leave, or resign." },
 ];
 
 export const ONBOARDING_STEPS = [

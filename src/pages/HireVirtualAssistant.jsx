@@ -18,7 +18,8 @@ import {
   WHAT_VAS_DO,
   TRAINING_PROCESS,
   DAY_IN_THE_LIFE,
-  COMPARISON,
+  SMARTDIAL_COLUMN,
+  IN_PERSON_COLUMN,
   ONBOARDING_STEPS,
   VA_PLANS,
   NEED_OPTIONS,
@@ -398,54 +399,78 @@ export default function HireVirtualAssistant() {
         </div>
       </section>
 
-      {/* SmartDial VA vs hiring in-house */}
+      {/* SmartDial vs Hiring In Person */}
       <section className="py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8">
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow">The comparison</p>
+            <p className="eyebrow">Competitor comparison</p>
             <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-              SmartDial VA vs. hiring in-house
+              SmartDial vs. Hiring In Person
             </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">
+              Spend your time closing deals. Let a SmartDial VA take care of the rest.
+            </p>
+            <a href="#lead-form" className="btn-accent mt-6 inline-flex">
+              Hire Your VA Today
+            </a>
           </Reveal>
 
-          <Reveal className="mt-14" direction="up">
-            <div className="panel overflow-hidden">
-              <div className="grid grid-cols-2 border-b border-border bg-white/[0.02] text-center">
-                <div className="px-4 py-4 sm:px-6">
-                  <span className="inline-flex items-center gap-2 font-display text-sm font-bold text-ink sm:text-[1rem]">
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
+          <div className="mt-14 grid gap-6 lg:grid-cols-2 lg:items-start">
+            <Reveal direction="right">
+              <Tilt3D maxTilt={3}>
+                <div className="panel h-full border-accent-strong/40 bg-gradient-to-b from-surface-2 to-surface p-8 shadow-[0_0_60px_-20px_rgba(139,92,246,0.4)]">
+                  <span className="inline-flex items-center gap-2 font-display text-lg font-bold text-ink">
+                    <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
                     SmartDial VA
                   </span>
+                  <ul className="mt-6 space-y-5">
+                    {SMARTDIAL_COLUMN.map((item) => (
+                      <li key={item.title} className="flex items-start gap-3">
+                        <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
+                        <div>
+                          <p className="text-sm font-semibold text-ink">{item.title}</p>
+                          <p className="mt-0.5 text-xs leading-relaxed text-ink-muted">{item.copy}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="border-l border-border px-4 py-4 sm:px-6">
-                  <span className="font-display text-sm font-bold text-ink-faint sm:text-[1rem]">Hiring In-House</span>
+              </Tilt3D>
+            </Reveal>
+
+            <Reveal direction="left">
+              <Tilt3D maxTilt={3}>
+                <div className="panel h-full p-8 opacity-80">
+                  <span className="font-display text-lg font-bold text-ink-faint">Hiring In Person</span>
+                  <ul className="mt-6 space-y-5">
+                    {IN_PERSON_COLUMN.map((item) => (
+                      <li key={item.title} className="flex items-start gap-3">
+                        <svg
+                          className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          aria-hidden="true"
+                        >
+                          <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <div>
+                          <p className="text-sm font-semibold text-ink-muted">{item.title}</p>
+                          <p className="mt-0.5 text-xs leading-relaxed text-ink-faint">{item.copy}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-              {COMPARISON.map((row, i) => (
-                <div
-                  key={row.label}
-                  className={`grid grid-cols-2 ${i !== COMPARISON.length - 1 ? "border-b border-border" : ""}`}
-                >
-                  <div className="flex items-start gap-2.5 px-4 py-4 sm:px-6">
-                    <Icon name="check" className="mt-0.5 h-4 w-4 shrink-0 text-teal" />
-                    <span className="text-sm leading-snug text-ink-muted">{row.smartdial}</span>
-                  </div>
-                  <div className="flex items-start gap-2.5 border-l border-border px-4 py-4 sm:px-6">
-                    <svg
-                      className="mt-0.5 h-4 w-4 shrink-0 text-ink-faint"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="text-sm leading-snug text-ink-faint">{row.inHouse}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+              </Tilt3D>
+            </Reveal>
+          </div>
+
+          <Reveal className="mt-10 text-center">
+            <a href="#lead-form" className="btn-ghost">
+              Hire Your VA Today
+            </a>
           </Reveal>
         </div>
       </section>
