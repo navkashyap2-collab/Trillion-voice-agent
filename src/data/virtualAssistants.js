@@ -28,21 +28,36 @@ export const WHAT_VAS_DO = [
   },
 ];
 
-export const WHY_US = [
+export const COMPARISON = [
   {
-    icon: "shield",
-    title: "Zero Training Overhead",
-    copy: "Trained in sales psychology, cold outreach, and Australian phone etiquette before day one.",
+    label: "Time to start",
+    smartdial: "Matched and working within 48 hours",
+    inHouse: "Weeks of recruiting, interviewing, and onboarding",
   },
   {
-    icon: "users",
-    title: "Dedicated Account Manager",
-    copy: "You get oversight and quality management built-in — no VA left unsupervised.",
+    label: "Cost",
+    smartdial: "One flexible plan, no employment overheads",
+    inHouse: "Full salary, super, leave entitlements, and equipment",
   },
   {
-    icon: "chart",
-    title: "Flexible Scaling",
-    copy: "Scale your team up or down based on your campaign needs, without contract headaches.",
+    label: "Training",
+    smartdial: "Pre-trained in cold calling & Australian phone etiquette",
+    inHouse: "You train them from scratch",
+  },
+  {
+    label: "Oversight",
+    smartdial: "Dedicated account manager included",
+    inHouse: "You manage performance yourself",
+  },
+  {
+    label: "Flexibility",
+    smartdial: "Scale up, down, or pause anytime",
+    inHouse: "Locked into ongoing employment obligations",
+  },
+  {
+    label: "Backup coverage",
+    smartdial: "Continuity covered if your VA is unavailable",
+    inHouse: "No backup if they're sick or leave",
   },
 ];
 

@@ -34,4 +34,12 @@ export const IMAGES = {
     src: "https://www.trybloom.ai/img/7608f044-24a1-4c3f-80b9-cf8f8752a00c",
     alt: "Hand confirming an appointment on a digital calendar",
   },
+  vaAtDesk: {
+    src: "https://www.trybloom.ai/img/f97f88ec-f8ac-4698-aa08-baf450706b41",
+    alt: "Virtual assistant wearing a headset, working at a laptop with a calendar and lead dashboard on a second monitor",
+  },
+  vaTypingDetail: {
+    src: "https://www.trybloom.ai/img/cb9edd80-3942-4143-b19c-8e839ecc9cd5",
+    alt: "Close-up of a virtual assistant's hands typing on a laptop next to a headset and appointment planner",
+  },
 };
