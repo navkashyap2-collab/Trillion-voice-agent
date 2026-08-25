@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
 // Static blur + transform-only drift: each blob is painted once and moved
-// on the compositor thread, so this never triggers a repaint on scroll.
+// on the compositor thread via a CSS animation (no per-frame JS), so this
+// never competes with input handling or triggers a repaint on scroll.
 const BLOBS = [
   { color: "rgba(139,92,246,0.20)", size: 560, top: "-12%", left: "-10%", duration: 26 },
   { color: "rgba(224,95,224,0.14)", size: 480, top: "48%", left: "82%", duration: 32 },
@@ -15,7 +15,7 @@ export default function GlowField({ className = "" }) {
   return (
     <div className={`overflow-hidden ${className}`} aria-hidden="true">
       {BLOBS.map((blob, i) => (
-        <motion.div
+        <div
           key={i}
           className="absolute rounded-full"
           style={{
@@ -26,9 +26,8 @@ export default function GlowField({ className = "" }) {
             background: `radial-gradient(circle, ${blob.color}, transparent 70%)`,
             filter: "blur(60px)",
             willChange: "transform",
+            animation: reduced ? "none" : `glow-drift ${blob.duration}s ease-in-out infinite`,
           }}
-          animate={reduced ? undefined : { x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
-          transition={{ duration: blob.duration, repeat: Infinity, ease: "easeInOut" }}
         />
       ))}
     </div>

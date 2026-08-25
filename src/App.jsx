@@ -37,10 +37,19 @@ function ScrollToTop() {
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "instant" in window ? "instant" : "auto" });
+        // A cold load can keep shifting layout after this first scroll
+        // (fonts, the 3D hero canvas, staggered reveal animations), which
+        // silently pulls the page back up. Re-assert the scroll position a
+        // few more times as things settle instead of trusting one shot.
+        [150, 400, 900].forEach((delay) => {
+          setTimeout(() => {
+            document.getElementById(id)?.scrollIntoView({ behavior: "instant" in window ? "instant" : "auto" });
+          }, delay);
+        });
         return;
       }
       attempts += 1;
-      if (attempts < 20) {
+      if (attempts < 60) {
         timeoutId = setTimeout(tryScroll, 50);
       } else {
         window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
