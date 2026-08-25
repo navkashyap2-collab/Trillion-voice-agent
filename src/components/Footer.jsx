@@ -1,20 +1,33 @@
 import { Link } from "react-router-dom";
-import { SITE, NAV_LINKS } from "../data/site.js";
+import { SITE, NAV_LINKS, SERVICES } from "../data/site.js";
 import LogoLockup from "./LogoLockup.jsx";
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-surface/40">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div className="md:col-span-2">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="sm:col-span-2 lg:col-span-2">
             <Link to="/" aria-label={SITE.name}>
               <LogoLockup />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
-              Qualified commercial cleaning leads, booked straight into your calendar. No lock-in
-              contracts, no cold-calling required on your end.
+              Qualified commercial cleaning leads, booked straight into your calendar, plus
+              plug-and-play Virtual Assistants for cold calling and admin. No lock-in contracts.
             </p>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-faint">Services</h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              {SERVICES.map((service) => (
+                <li key={service.to}>
+                  <Link to={service.to} className="text-ink-muted transition-colors hover:text-ink">
+                    {service.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>

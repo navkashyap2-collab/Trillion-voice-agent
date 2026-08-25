@@ -29,6 +29,12 @@ export const SEO_ROUTES = [
       "Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres in Melbourne, Sydney and Australia-wide.",
   },
   {
+    path: "/hire-virtual-assistant",
+    title: "Hire a Virtual Assistant",
+    description:
+      "Hire pre-vetted, fluent Virtual Assistants trained for cold calling, appointment setting, CRM management and support — plug-and-play for Australian businesses.",
+  },
+  {
     path: "/contact",
     title: "Contact",
     description:

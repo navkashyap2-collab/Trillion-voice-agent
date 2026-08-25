@@ -5,9 +5,28 @@ import { SITE, NAV_LINKS } from "../data/site.js";
 import LogoLockup from "./LogoLockup.jsx";
 import Magnetic from "./Magnetic.jsx";
 
-function NavItem({ to, label }) {
+function NavItem({ to, label, featured }) {
+  if (featured) {
+    return (
+      <NavLink
+        to={to}
+        end={to === "/"}
+        className={({ isActive }) =>
+          `inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-sm font-semibold transition-colors duration-300 ${
+            isActive
+              ? "border-accent-strong bg-white/[0.06] text-ink"
+              : "border-border-strong bg-white/[0.02] text-ink-muted hover:border-accent-strong hover:text-ink"
+          }`
+        }
+      >
+        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
+        {label}
+      </NavLink>
+    );
+  }
+
   return (
-    <NavLink to={to} end={to === "/"} className="group relative px-1 py-2 text-sm font-medium">
+    <NavLink to={to} end={to === "/"} className="group relative shrink-0 whitespace-nowrap px-1 py-2 text-sm font-medium">
       {({ isActive }) => (
         <>
           <span className={isActive ? "text-ink" : "text-ink-muted transition-colors group-hover:text-ink"}>
@@ -45,18 +64,21 @@ export default function Header() {
           <LogoLockup />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-4 lg:gap-6 xl:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <NavItem key={link.to} {...link} />
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 md:flex">
-          <a href={SITE.phoneHref} className="text-sm font-medium text-ink-muted transition-colors hover:text-ink">
+        <div className="hidden items-center gap-4 xl:flex">
+          <a
+            href={SITE.phoneHref}
+            className="whitespace-nowrap text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+          >
             {SITE.phone}
           </a>
           <Magnetic strength={0.25}>
-            <Link to="/pricing" className="btn-accent !px-5 !py-2.5 text-xs">
+            <Link to="/pricing" className="btn-accent !px-5 !py-2.5 text-xs whitespace-nowrap">
               Get Leads
             </Link>
           </Magnetic>
@@ -65,7 +87,7 @@ export default function Header() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border text-ink md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border text-ink xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label="Toggle navigation menu"
@@ -89,7 +111,7 @@ export default function Header() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-white/[0.06] md:hidden"
+            className="overflow-hidden border-t border-white/[0.06] xl:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
@@ -98,11 +120,14 @@ export default function Header() {
                   to={link.to}
                   end={link.to === "/"}
                   className={({ isActive }) =>
-                    `rounded-lg px-3 py-3 text-base font-medium ${
+                    `flex items-center gap-2 rounded-lg px-3 py-3 text-base font-medium ${
                       isActive ? "bg-white/5 text-ink" : "text-ink-muted"
                     }`
                   }
                 >
+                  {link.featured && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-accent to-teal" aria-hidden="true" />
+                  )}
                   {link.label}
                 </NavLink>
               ))}
