@@ -35,22 +35,24 @@ export default function App() {
         <ScrollToTop />
         <MagneticCursor />
         <Header />
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-            <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
-            <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
-            <Route path="/who-we-help" element={<PageTransition><WhoWeHelp /></PageTransition>} />
-            <Route
-              path="/hire-virtual-assistant"
-              element={<PageTransition><HireVirtualAssistant /></PageTransition>}
-            />
-            <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-            <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
-            <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
-            <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-          </Routes>
-        </AnimatePresence>
+        <main className="flex-1">
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/how-it-works" element={<PageTransition><HowItWorks /></PageTransition>} />
+              <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
+              <Route path="/who-we-help" element={<PageTransition><WhoWeHelp /></PageTransition>} />
+              <Route
+                path="/hire-virtual-assistant"
+                element={<PageTransition><HireVirtualAssistant /></PageTransition>}
+              />
+              <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+              <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+              <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
+              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+            </Routes>
+          </AnimatePresence>
+        </main>
         <Footer />
       </div>
     </div>

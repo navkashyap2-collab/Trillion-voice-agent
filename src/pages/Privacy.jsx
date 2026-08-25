@@ -34,16 +34,16 @@ export default function Privacy() {
         </Reveal>
 
         <Section title="What we collect">
-          <p>When you submit the contact form on this site, we collect:</p>
+          <p>When you submit a form on this site — whether the contact form or the virtual assistant enquiry form — we collect:</p>
           <ul className="list-disc space-y-2 pl-5">
-            <li>Your name and the company you work for</li>
+            <li>Your name and the company you work for, where asked</li>
             <li>Your phone number and email address</li>
-            <li>Which pricing bundle you're interested in, if selected</li>
-            <li>Any message you choose to include</li>
+            <li>Which pricing bundle or virtual assistant plan you're interested in, if selected</li>
+            <li>Any message, primary need, or estimated start date you choose to include</li>
           </ul>
           <p>
             We don't use tracking cookies, analytics scripts, or ad pixels on this site. The only data
-            we receive is what you actively type into the contact form and submit.
+            we receive is what you actively type into one of these forms and submit.
           </p>
         </Section>
 

@@ -3,7 +3,7 @@ import Seo from "../components/Seo.jsx";
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex max-w-2xl flex-col items-center px-6 py-32 text-center">
+    <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-32 text-center">
       <Seo title="Page not found" description="This page doesn't exist." />
       <p className="eyebrow">404</p>
       <h1 className="mt-4 font-display text-4xl font-extrabold text-ink">This page took a wrong turn.</h1>
@@ -11,6 +11,6 @@ export default function NotFound() {
       <Link to="/" className="btn-accent mt-8">
         Back to Home
       </Link>
-    </main>
+    </div>
   );
 }
