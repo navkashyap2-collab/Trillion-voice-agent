@@ -1,7 +1,7 @@
 export const SITE = {
   name: "Smartdial Solutions",
-  phone: "0468 217 012",
-  phoneHref: "tel:+61468217012",
+  phone: "(08) 6245 2490",
+  phoneHref: "tel:+61862452490",
   email: "contact@smartdialsolutions.com.au",
   emailHref: "mailto:contact@smartdialsolutions.com.au",
   serviceAreas: ["Melbourne", "Sydney", "Australia-wide"],
