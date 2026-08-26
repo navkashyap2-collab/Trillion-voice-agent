@@ -296,7 +296,7 @@ export default function Contact() {
                   </span>
                   </Float>
                   <div>
-                    <p className="text-sm font-semibold text-ink">Call or text</p>
+                    <p className="text-sm font-semibold text-ink">Call</p>
                     <a href={SITE.phoneHref} className="text-sm text-ink-muted transition-colors hover:text-accent-strong">
                       {SITE.phone}
                     </a>
