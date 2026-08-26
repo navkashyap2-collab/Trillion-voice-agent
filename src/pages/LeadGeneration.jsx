@@ -27,11 +27,11 @@ const STEPS = [
 const TRUST_ITEMS = [
   { icon: "shield", label: "No lock-in contracts" },
   { icon: "target", label: "Qualified leads only" },
-  { icon: "compass", label: "Melbourne & Sydney focus" },
+  { icon: "compass", label: "Australia-wide coverage" },
   { icon: "bolt", label: "Fast turnaround" },
 ];
 
-const MARQUEE_ITEMS = ["No lock-in contracts", "Qualified leads only", "Melbourne & Sydney", "Fast turnaround", "Pay per lead"];
+const MARQUEE_ITEMS = ["No lock-in contracts", "Qualified leads only", "Australia-wide", "Fast turnaround", "Pay per lead"];
 
 const SEGMENT_PREVIEW = [
   { name: "Office buildings", image: IMAGES.officeBuildingExterior },
@@ -85,7 +85,7 @@ export default function LeadGeneration() {
     <>
       <Seo
         title="Cold Calling & Lead Generation"
-        description="Smartdial Solutions generates qualified commercial cleaning leads across Melbourne, Sydney and Australia-wide, and books them straight into your calendar."
+        description="Smartdial Solutions generates qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney, and books them straight into your calendar."
       />
 
       {/* Hero */}

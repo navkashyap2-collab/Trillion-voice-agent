@@ -107,7 +107,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact"
-        description="Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads in Melbourne, Sydney or Australia-wide."
+        description="Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney."
       />
 
       <section className="relative overflow-hidden">

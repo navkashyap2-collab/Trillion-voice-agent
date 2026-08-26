@@ -105,7 +105,7 @@ export default function WhoWeHelp() {
     <>
       <Seo
         title="Who We Help"
-        description="Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres in Melbourne, Sydney and Australia-wide."
+        description="Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres, Australia-wide."
       />
 
       <section className="relative overflow-hidden">
@@ -132,6 +132,22 @@ export default function WhoWeHelp() {
               <SegmentCard segment={segment} />
             </RevealItem>
           ))}
+          <RevealItem direction="up">
+            <Link
+              to="/contact"
+              className="group flex h-56 w-full flex-col items-start justify-center gap-3 rounded-3xl border border-dashed border-border-strong/60 p-6 text-left transition-colors hover:border-accent-strong/60 hover:bg-white/[0.02]"
+            >
+              <h3 className="font-display text-base font-bold text-ink">Different segment?</h3>
+              <p className="text-sm leading-relaxed text-ink-muted">
+                We generate leads across other commercial property types too, Australia-wide.
+                Tell us who you clean for.
+              </p>
+              <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-accent-strong">
+                Get in touch
+                <Icon name="arrow" className="h-4 w-4" />
+              </span>
+            </Link>
+          </RevealItem>
         </RevealGroup>
       </section>
 
@@ -184,12 +200,12 @@ export default function WhoWeHelp() {
         <Reveal className="mx-auto max-w-3xl px-6 text-center lg:px-8">
           <p className="eyebrow">Service areas</p>
           <h2 className="mt-3 font-display text-2xl font-bold text-ink sm:text-3xl">
-            Melbourne, Sydney, and Australia-wide
+            Australia-wide coverage
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted">
-            We&rsquo;re currently focused on Melbourne and Sydney, with campaigns available
-            Australia-wide as we grow. If your service area isn&rsquo;t listed, ask &mdash; we&rsquo;re
-            expanding fast.
+            We run commercial cleaning lead gen campaigns Australia-wide, with dedicated,
+            hands-on coverage in Melbourne and Sydney. Wherever your business operates, tell us
+            your service area and we&rsquo;ll build you a campaign.
           </p>
         </Reveal>
       </section>

@@ -9,7 +9,7 @@ export const BUNDLES = [
     features: [
       "5 qualified commercial cleaning leads",
       "Delivered on a rolling basis",
-      "Melbourne or Sydney service area",
+      "One service area, anywhere in Australia",
       "Email + phone support",
     ],
     featured: false,
@@ -24,7 +24,7 @@ export const BUNDLES = [
     features: [
       "10 qualified commercial cleaning leads",
       "Delivered on a rolling basis",
-      "Melbourne or Sydney service area",
+      "One service area, anywhere in Australia",
       "Priority email + phone support",
     ],
     featured: false,
@@ -39,7 +39,7 @@ export const BUNDLES = [
     features: [
       "20 qualified commercial cleaning leads",
       "Delivered on a rolling basis",
-      "Melbourne, Sydney, or both",
+      "Multiple service areas, Australia-wide",
       "Dedicated account contact",
     ],
     featured: true,
