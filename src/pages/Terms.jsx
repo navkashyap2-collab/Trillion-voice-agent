@@ -17,7 +17,7 @@ export default function Terms() {
     <>
       <Seo
         title="Terms of Service"
-        description="The terms that apply when you engage Smartdial Solutions for commercial cleaning lead generation."
+        description="The terms that apply when you engage Smartdial Solutions for B2B appointment setting and lead generation."
       />
 
       <section className="mx-auto max-w-3xl px-6 pt-24 pb-24 lg:px-8">
@@ -28,78 +28,93 @@ export default function Terms() {
           </h1>
           <p className="mt-5 text-sm text-ink-faint">Last updated: 22 August 2026</p>
           <p className="mt-6 text-base leading-relaxed text-ink-muted">
-            These terms cover how Smartdial Solutions ("we", "us") provides commercial cleaning lead
-            generation and appointment-setting services to clients ("you", "your business"). By
-            purchasing a lead bundle or engaging our services, you agree to these terms.
+            These terms cover how Smartdial Solutions ("we", "us") provides B2B appointment-setting
+            and lead-generation services to clients ("you", "your business"). By engaging the Founding
+            Client Pilot or any other Smartdial Solutions service, you agree to these terms.
           </p>
         </Reveal>
 
         <Section title="The service">
           <p>
-            We identify and qualify commercial cleaning prospects in your service area, then book
-            appointments directly into your calendar. Leads are sold in bundles (Starter, Growth,
-            Scale) as listed on our{" "}
+            We research target companies and decision-makers in your agreed service area, run
+            personalised outbound outreach, follow up, and qualify genuine buying opportunities before
+            handing them to you as a booked next commercial step. The current offer — the SmartDial
+            Appointment Engine, a 30-day Founding Client Pilot — is listed on our{" "}
             <a href="/pricing" className="text-accent-strong underline underline-offset-2">
               Pricing
             </a>{" "}
-            page — pricing, lead counts and features shown there form part of these terms for any
-            bundle you purchase.
+            page, and the pricing, inclusions and service-extension assurance shown there form part of
+            these terms for any pilot you engage.
           </p>
         </Section>
 
-        <Section title="One client per lead">
+        <Section title="One client per territory">
           <p>
-            Each lead is scoped to your service area and job type before it's booked, and sold to one
-            client only — we don't resell the same contact to multiple competing businesses.
+            Each campaign is scoped to your agreed service area and target customer profile, and run
+            for one client only — we don't run the same prospect list for multiple competing
+            businesses in the same territory.
           </p>
         </Section>
 
-        <Section title="No lock-in contracts">
+        <Section title="No lock-in contract">
           <p>
-            There are no ongoing subscriptions or lock-in periods. You purchase a bundle, we deliver
-            the agreed number of leads on a rolling basis, and the engagement ends there unless you
-            choose to purchase another bundle.
+            There is no ongoing subscription or lock-in period. You engage a pilot, we manage the
+            agreed campaign for its term, and the engagement ends there unless you choose to continue.
           </p>
         </Section>
 
-        <Section title="What counts as a qualified lead">
+        <Section title="What counts as a qualified opportunity">
           <p>
-            A lead is a business or property manager who has expressed genuine interest in commercial
-            cleaning services within your stated service area and has been contacted and screened by
-            us before the appointment is booked. We aim to deliver leads that are worth your time —
-            if you believe a specific lead was clearly unqualified or outside your agreed service
-            area, contact us and we'll look into it.
+            A qualified opportunity is a prospect that fits your agreed service area and target
+            profile, where we've reached a decision-maker (or a credible route to one), confirmed a
+            genuine service need, and secured agreement to a specific next commercial step — a call,
+            meeting, site inspection, quote discussion, or scheduled follow-up. It does not include
+            someone who only asked why they were called, a wrong-fit prospect, a duplicate, a
+            suppressed/do-not-contact contact, a generic reply with no buying signal, or a job seeker
+            or supplier enquiry. If you believe a specific opportunity was clearly unqualified, contact
+            us and we'll look into it.
+          </p>
+        </Section>
+
+        <Section title="Service-extension assurance">
+          <p>
+            If a pilot produces zero qualified opportunities in its first 30 days, we'll continue
+            campaign management for up to another 30 days at no additional management fee, subject to
+            these terms. This is a commitment to continue executing the agreed campaign — it is not a
+            guarantee of revenue, contracts, or a fixed number of appointments.
           </p>
         </Section>
 
         <Section title="Your control over quotes and jobs">
           <p>
-            We book the appointment; you run the sales conversation, quote the job, and decide whether
-            to take it on. We don't quote prices or make commitments to prospects on your behalf.
+            We hand off the qualified, booked opportunity; you run the sales conversation, quote the
+            job, and decide whether to take it on. We don't quote prices or make commitments to
+            prospects on your behalf.
           </p>
         </Section>
 
         <Section title="Payment">
           <p>
-            Bundles are paid for as agreed at the time of purchase. Invoices are issued for each
+            The pilot fee is paid as agreed at the time of engagement. Invoices are issued for each
             engagement and are payable under the terms stated on the invoice.
           </p>
         </Section>
 
         <Section title="Limitation of liability">
           <p>
-            We take reasonable care in qualifying and booking leads, but we don't guarantee that any
-            individual lead will convert into a paying customer for your business — that depends on
-            factors outside our control, including your pricing, availability, and service quality.
-            To the extent permitted by Australian law, our liability for any claim relating to this
-            service is limited to the amount you paid for the relevant bundle.
+            We take reasonable care in researching, qualifying and booking opportunities, but we don't
+            guarantee that any individual opportunity will convert into a paying customer for your
+            business — that depends on factors outside our control, including your pricing,
+            availability, and service quality. To the extent permitted by Australian law, our liability
+            for any claim relating to this service is limited to the amount you paid for the relevant
+            engagement.
           </p>
         </Section>
 
         <Section title="Changes to these terms">
           <p>
             We may update these terms from time to time; the current version on this page applies to
-            any bundle purchased after an update takes effect.
+            any engagement entered into after an update takes effect.
           </p>
         </Section>
 

@@ -12,8 +12,8 @@ export default function Footer() {
               <LogoLockup />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
-              Qualified commercial cleaning leads, booked straight into your calendar, plus
-              plug-and-play Virtual Assistants for cold calling and admin. No lock-in contracts.
+              Qualified B2B sales opportunities, researched and booked into your pipeline, plus
+              plug-and-play Virtual Assistants for cold calling and admin. No lock-in contract.
             </p>
           </div>
 

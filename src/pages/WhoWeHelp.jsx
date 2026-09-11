@@ -105,7 +105,7 @@ export default function WhoWeHelp() {
     <>
       <Seo
         title="Who We Help"
-        description="Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres, Australia-wide."
+        description="Smartdial Solutions runs B2B outbound campaigns for commercial service companies — starting with commercial cleaning, across offices, medical, strata, retail and education."
       />
 
       <section className="relative overflow-hidden">
@@ -115,11 +115,13 @@ export default function WhoWeHelp() {
           <Reveal>
             <p className="eyebrow">Who we help</p>
             <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
-              Built for commercial cleaning, across every segment
+              Starting with commercial cleaning, across every segment
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-              We generate leads across the commercial property types that keep cleaning businesses
-              busiest. Tap or hover a card for detail.
+              We&rsquo;re validating the model with commercial cleaning companies seeking recurring
+              B2B contracts &mdash; built for any business where one new customer or contract is
+              valuable enough to justify professional customer acquisition. Tap or hover a card for
+              detail.
             </p>
           </Reveal>
         </div>

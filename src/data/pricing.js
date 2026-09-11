@@ -1,63 +1,39 @@
-export const BUNDLES = [
-  {
-    id: "starter",
-    name: "Starter",
-    leads: 5,
-    pricePerLead: 80,
-    total: 400,
-    tagline: "Test the water with a small, qualified batch.",
-    features: [
-      "5 qualified commercial cleaning leads",
-      "Delivered on a rolling basis",
-      "One service area, anywhere in Australia",
-      "Email + phone support",
-    ],
-    featured: false,
-  },
-  {
-    id: "growth",
-    name: "Growth",
-    leads: 10,
-    pricePerLead: 70,
-    total: 700,
-    tagline: "A steady pipeline for an active sales month.",
-    features: [
-      "10 qualified commercial cleaning leads",
-      "Delivered on a rolling basis",
-      "One service area, anywhere in Australia",
-      "Priority email + phone support",
-    ],
-    featured: false,
-  },
-  {
-    id: "scale",
-    name: "Scale",
-    leads: 20,
-    pricePerLead: 60,
-    total: 1200,
-    tagline: "Our best per-lead rate for teams ready to grow.",
-    features: [
-      "20 qualified commercial cleaning leads",
-      "Delivered on a rolling basis",
-      "Multiple service areas, Australia-wide",
-      "Dedicated account contact",
-    ],
-    featured: true,
-  },
+export const PILOT = {
+  name: "SmartDial Appointment Engine",
+  badge: "Founding Client Pilot",
+  price: "$1,500 + GST",
+  subtext: "30-day managed pilot",
+  highlights: ["No setup fee", "No long-term contract", "Limited to 3 founding-client businesses"],
+  included: [
+    "Ideal-customer-profile and territory setup",
+    "Up to 150 researched target accounts",
+    "Decision-maker/contact-route research",
+    "Account qualification and scoring",
+    "Personalised outbound messaging",
+    "Follow-up management",
+    "Reply qualification",
+    "Qualified opportunity handoff",
+    "Meeting / site-visit coordination where agreed",
+    "CRM tracking",
+    "Weekly performance reporting",
+  ],
+  spotsAvailable: 3,
+};
+
+export const QUALIFIES = [
+  "The prospect fits your agreed service area and target profile",
+  "We reach a decision-maker, or a credible route to one",
+  "There's a genuine service need — a supplier review, quote opportunity, upcoming renewal, dissatisfaction, tender, or explicit willingness to discuss the service",
+  "They agree to a next commercial step — a call, meeting, site inspection, quote discussion, or scheduled follow-up",
 ];
 
-// Cross-sell tier combining a Lead Gen bundle with a Dedicated VA. No fixed
-// price — a Lead Gen bundle (fixed $) plus a VA plan (custom-quoted, see
-// data/virtualAssistants.js) can't honestly collapse into one number, so this
-// tier is scoped and quoted on request instead.
-export const HYBRID_PACKAGE = {
-  id: "hybrid",
-  name: "Hybrid Package",
-  tagline: "A Lead Gen campaign plus 1 Dedicated VA, working as one team.",
-  features: [
-    "A Lead Gen bundle scoped to your service area",
-    "1 Dedicated VA for follow-ups, CRM & scheduling",
-    "Every booked lead followed up and chased, not just delivered",
-    "Single account manager across both services",
-  ],
-};
+export const DISQUALIFIES = [
+  "Someone who only asks why they were called",
+  "Wrong service area",
+  "Wrong service type",
+  "Residential/Airbnb work surfacing in a commercial campaign",
+  "A duplicate prospect",
+  "An existing suppression / do-not-contact prospect",
+  "A generic “send an email” response with no buying signal",
+  "A job seeker or supplier enquiry",
+];

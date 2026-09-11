@@ -39,7 +39,7 @@ export default function Privacy() {
           <ul className="list-disc space-y-2 pl-5">
             <li>Your name and the company you work for, where asked</li>
             <li>Your phone number and email address</li>
-            <li>Which pricing bundle or virtual assistant plan you're interested in, if selected</li>
+            <li>Whether you're interested in the Founding Pilot or a Virtual Assistant, if selected</li>
             <li>Any message, primary need, or estimated start date you choose to include</li>
           </ul>
           <p>
@@ -50,10 +50,10 @@ export default function Privacy() {
 
         <Section title="How we use it">
           <p>
-            Submitted enquiries are used solely to respond to you about our lead-generation service —
-            to follow up, answer questions, and, if you become a client, to deliver and manage the
-            leads we generate on your behalf. We don't sell or rent your contact details to third
-            parties, and we don't use them for unrelated marketing.
+            Submitted enquiries are used solely to respond to you about our appointment-setting and
+            lead-generation service — to follow up, answer questions, and, if you become a client, to
+            deliver and manage the campaign we run on your behalf. We don't sell or rent your contact
+            details to third parties, and we don't use them for unrelated marketing.
           </p>
         </Section>
 
@@ -78,9 +78,9 @@ export default function Privacy() {
         <Section title="If you become a client">
           <p>
             If you engage Smartdial Solutions, we'll also hold the business details needed to deliver
-            and invoice leads — your service area, job preferences, and billing contact. This is kept
-            only as long as needed for the business relationship and any tax/record-keeping
-            obligations under Australian law.
+            and invoice your campaign — your service area, target customer profile, and billing
+            contact. This is kept only as long as needed for the business relationship and any
+            tax/record-keeping obligations under Australian law.
           </p>
         </Section>
 
@@ -117,7 +117,7 @@ export default function Privacy() {
       <Reveal as="section" className="border-t border-white/[0.06] py-20">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
           <h2 className="text-balance font-display text-2xl font-extrabold text-ink sm:text-3xl">
-            Ready to fill your calendar?
+            Ready to build your pipeline?
           </h2>
           <p className="mt-3 text-base text-ink-muted">
             See our pricing, or get in touch with any questions.

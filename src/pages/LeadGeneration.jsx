@@ -11,27 +11,27 @@ import Float from "../components/Float.jsx";
 import Parallax from "../components/Parallax.jsx";
 import Magnetic from "../components/Magnetic.jsx";
 import { SITE } from "../data/site.js";
-import { BUNDLES } from "../data/pricing.js";
+import { PILOT } from "../data/pricing.js";
 import { IMAGES } from "../data/images.js";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion.js";
 
-const HEADLINE_WORDS = ["Your", "calendar,", "filled", "with", "commercial", "cleaning", "jobs."];
+const HEADLINE_WORDS = ["Qualified", "sales", "opportunities,", "booked", "into", "your", "pipeline."];
 
 const STEPS = [
-  { title: "Discovery call", copy: "We map your ideal client, service area, and current booking capacity." },
-  { title: "Campaign launch", copy: "We reach commercial cleaning prospects in your patch, consistently." },
-  { title: "Qualify & book", copy: "Interested prospects are qualified and booked into your calendar." },
-  { title: "You close the job", copy: "You run the appointment and win the contract." },
+  { title: "Target & research", copy: "We define your ideal customer profile and research the right accounts." },
+  { title: "Outreach & follow-up", copy: "We launch personalised outreach to decision-makers and follow up consistently." },
+  { title: "Qualify", copy: "Genuine buying interest is qualified before it ever reaches your pipeline." },
+  { title: "Book the next step", copy: "A qualified opportunity is booked in — you take it from there." },
 ];
 
 const TRUST_ITEMS = [
-  { icon: "shield", label: "No lock-in contracts" },
-  { icon: "target", label: "Qualified leads only" },
+  { icon: "shield", label: "No lock-in contract" },
+  { icon: "target", label: "Qualified opportunities only" },
   { icon: "compass", label: "Australia-wide coverage" },
-  { icon: "bolt", label: "Fast turnaround" },
+  { icon: "chart", label: "Weekly performance reporting" },
 ];
 
-const MARQUEE_ITEMS = ["No lock-in contracts", "Qualified leads only", "Australia-wide", "Fast turnaround", "Pay per lead"];
+const MARQUEE_ITEMS = ["No lock-in contract", "Qualified opportunities only", "Australia-wide", "Weekly reporting", "Founding client pilot"];
 
 const SEGMENT_PREVIEW = [
   { name: "Office buildings", image: IMAGES.officeBuildingExterior },
@@ -75,17 +75,14 @@ function Headline() {
 }
 
 export default function LeadGeneration() {
-  const reduced = usePrefersReducedMotion();
   const heroRef = useRef(null);
-  const stepsRef = useRef(null);
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const { scrollYProgress: stepsProgress } = useScroll({ target: stepsRef, offset: ["start 0.75", "end 0.35"] });
 
   return (
     <>
       <Seo
-        title="Cold Calling & Lead Generation"
-        description="Smartdial Solutions generates qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney, and books them straight into your calendar."
+        title="B2B Appointment Setting"
+        description="See how Smartdial Solutions turns cold B2B prospects into qualified, booked sales opportunities — starting with commercial cleaning, Australia-wide."
       />
 
       {/* Hero */}
@@ -103,7 +100,7 @@ export default function LeadGeneration() {
             transition={{ duration: 0.35 }}
             className="eyebrow"
           >
-            Commercial Cleaning Lead Generation
+            B2B Appointment Setting
           </motion.p>
 
           <div className="mt-6">
@@ -116,8 +113,9 @@ export default function LeadGeneration() {
             transition={{ duration: 0.4, delay: 0.25 }}
             className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-ink-muted"
           >
-            We find and qualify commercial cleaning prospects, then book them straight into your
-            calendar &mdash; so you spend time cleaning, not cold-calling.
+            SmartDial builds and manages targeted outbound campaigns for B2B service companies
+            &mdash; from prospect research and decision-maker outreach to follow-up, qualification
+            and booked sales opportunities.
           </motion.p>
 
           <motion.div
@@ -128,12 +126,11 @@ export default function LeadGeneration() {
           >
             <Magnetic>
               <Link to="/pricing" className="btn-accent">
-                Get Leads
+                Start a Founding Pilot
               </Link>
             </Magnetic>
             <Magnetic>
               <a href={SITE.phoneHref} className="btn-ghost">
-                <Icon name="phone-inline" />
                 Call Now &mdash; {SITE.phone}
               </a>
             </Magnetic>
@@ -150,21 +147,12 @@ export default function LeadGeneration() {
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">How it works</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            From first call to closed job in four steps
+            From cold prospect to qualified opportunity
           </h2>
         </Reveal>
 
-        <div ref={stepsRef} className="relative mt-16">
-          <div className="absolute top-6 right-0 left-0 hidden h-px overflow-hidden bg-border-strong/25 lg:block" aria-hidden="true">
-            {reduced ? (
-              <div className="h-full bg-gradient-to-r from-transparent via-border-strong to-transparent" />
-            ) : (
-              <motion.div
-                className="h-full origin-left bg-gradient-to-r from-accent via-teal to-accent-strong"
-                style={{ scaleX: stepsProgress }}
-              />
-            )}
-          </div>
+        <div className="relative mt-16">
+          <div className="absolute top-6 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-border-strong to-transparent lg:block" aria-hidden="true" />
           <RevealGroup className="grid gap-8 lg:grid-cols-4" stagger={0.15}>
             {STEPS.map((step, i) => (
               <RevealItem key={step.title} className="relative">
@@ -188,7 +176,7 @@ export default function LeadGeneration() {
         </Reveal>
       </section>
 
-      {/* Built for professional results */}
+      {/* Why it works */}
       <section className="border-t border-white/[0.06] bg-surface/30 py-24">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="flex flex-col items-center gap-12 md:flex-row">
@@ -211,15 +199,15 @@ export default function LeadGeneration() {
             <Reveal direction="left" className="w-full md:w-1/2">
               <p className="eyebrow">Why it works</p>
               <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-                We book the job. You still control the quality.
+                We manage the pipeline. You still control the close.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-ink-muted">
-                We're not a generic lead marketplace reselling the same contact to five
-                competitors. Every appointment is scoped to your service area and your ideal job
-                type before it's ever booked, so you walk in already knowing it's worth your time.
+                We're not a raw contact list reselling the same lead to five competitors. Every
+                opportunity is scoped to your service area and ideal customer profile before it's
+                ever handed off, so you walk in already knowing it's worth your time.
               </p>
               <ul className="mt-6 space-y-3">
-                {["One client per lead, per area", "Booked with your actual capacity in mind", "You keep full control of the quote and the job"].map(
+                {["One opportunity per client, per territory", "Qualified against your actual buying criteria", "You keep full control of the quote and the close"].map(
                   (item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-ink-muted">
                       <svg className="mt-0.5 h-4 w-4 shrink-0 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -257,8 +245,12 @@ export default function LeadGeneration() {
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">Who we help</p>
             <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-              Built for commercial cleaning, across every segment
+              Starting with commercial cleaning, across every segment
             </h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-muted">
+              Built for any B2B service business where one new customer or contract is valuable
+              enough to justify professional customer acquisition.
+            </p>
           </Reveal>
 
           <RevealGroup className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
@@ -290,40 +282,30 @@ export default function LeadGeneration() {
       </section>
 
       {/* Pricing teaser */}
-      <section className="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+      <section className="mx-auto max-w-4xl px-6 py-24 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="eyebrow">Pricing</p>
           <h2 className="mt-3 text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            Pay per qualified lead, nothing else
+            One clear offer, built to prove results
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-14 grid gap-6 md:grid-cols-3" stagger={0.12}>
-          {BUNDLES.map((bundle) => (
-            <RevealItem key={bundle.id}>
-              <Tilt3D maxTilt={8} className="h-full">
-                <div
-                  className={`panel flex h-full flex-col p-6 ${
-                    bundle.featured ? "border-accent-strong/60 shadow-[0_0_40px_-12px_rgba(139,92,246,0.35)]" : ""
-                  }`}
-                >
-                  {bundle.featured && (
-                    <span className="mb-3 inline-flex w-fit items-center rounded-full bg-gradient-to-r from-accent to-teal px-3 py-1 text-xs font-semibold text-base">
-                      Best value
-                    </span>
-                  )}
-                  <h3 className="font-display text-lg font-bold text-ink">{bundle.name}</h3>
-                  <p className="mt-1 text-sm text-ink-muted">{bundle.leads} leads</p>
-                  <p className="mt-4 font-display text-3xl font-extrabold text-ink">
-                    ${bundle.total}
-                    <span className="text-sm font-medium text-ink-faint"> total</span>
-                  </p>
-                  <p className="text-xs text-ink-faint">${bundle.pricePerLead}/lead</p>
-                </div>
-              </Tilt3D>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <Reveal className="mt-14">
+          <Tilt3D maxTilt={6}>
+            <div className="panel relative flex flex-col items-center p-8 text-center sm:p-10">
+              <span className="rounded-full bg-gradient-to-r from-accent to-teal px-4 py-1 text-xs font-bold text-base shadow-lg">
+                {PILOT.badge}
+              </span>
+              <h3 className="mt-5 font-display text-2xl font-bold text-ink">{PILOT.name}</h3>
+              <p className="mt-4 font-display text-4xl font-extrabold text-ink">{PILOT.price}</p>
+              <p className="mt-1 text-sm text-teal">{PILOT.subtext}</p>
+              <p className="mt-4 max-w-md text-sm text-ink-muted">
+                No setup fee. No long-term contract. Limited to {PILOT.spotsAvailable}{" "}
+                founding-client businesses.
+              </p>
+            </div>
+          </Tilt3D>
+        </Reveal>
 
         <Reveal className="mt-10 text-center">
           <Link to="/pricing" className="btn-ghost">
@@ -338,7 +320,7 @@ export default function LeadGeneration() {
         <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-teal/10" aria-hidden="true" />
         <div className="relative mx-auto max-w-3xl px-6 py-24 text-center lg:px-8">
           <h2 className="text-balance font-display text-3xl font-extrabold text-ink sm:text-4xl">
-            Ready to fill your calendar?
+            Ready to build your pipeline?
           </h2>
           <p className="mt-4 text-lg text-ink-muted">
             Tell us your service area and we&rsquo;ll show you what a full pipeline looks like.
@@ -346,7 +328,7 @@ export default function LeadGeneration() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
               <Link to="/pricing" className="btn-accent">
-                Get Leads
+                Start a Founding Pilot
               </Link>
             </Magnetic>
             <Magnetic>

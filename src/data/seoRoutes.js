@@ -6,33 +6,33 @@
 export const SEO_ROUTES = [
   {
     path: "/",
-    title: "Lead Generation & Virtual Assistants",
+    title: "B2B Appointment Setting & Qualified Sales Opportunities",
     description:
-      "Smartdial Solutions: a growth platform combining commercial cleaning lead generation with dedicated Virtual Assistants for cold outreach and admin.",
+      "Smartdial Solutions helps Australian B2B service companies identify prospects, reach decision-makers, follow up and generate qualified sales opportunities.",
   },
   {
     path: "/lead-generation",
-    title: "Cold Calling & Lead Generation",
+    title: "B2B Appointment Setting",
     description:
-      "Smartdial Solutions generates qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney, and books them straight into your calendar.",
+      "See how Smartdial Solutions turns cold B2B prospects into qualified, booked sales opportunities — starting with commercial cleaning, Australia-wide.",
   },
   {
     path: "/how-it-works",
     title: "How It Works",
     description:
-      "How Smartdial Solutions turns commercial cleaning prospects into booked appointments on your calendar, step by step.",
+      "See how Smartdial Solutions turns cold B2B prospects into qualified, booked sales opportunities — from account research to the next commercial step.",
   },
   {
     path: "/pricing",
     title: "Pricing",
     description:
-      "Simple per-lead pricing for qualified commercial cleaning leads. Starter, Growth and Scale bundles, no lock-in contracts.",
+      "The SmartDial Appointment Engine: a 30-day Founding Client Pilot that turns targeted B2B prospects into qualified sales opportunities. $1,500 + GST.",
   },
   {
     path: "/who-we-help",
     title: "Who We Help",
     description:
-      "Smartdial Solutions generates commercial cleaning leads across office buildings, strata, medical clinics, retail and childcare centres, Australia-wide.",
+      "Smartdial Solutions runs B2B outbound campaigns for commercial service companies — starting with commercial cleaning, across offices, medical, strata, retail and education.",
   },
   {
     path: "/hire-virtual-assistant",
@@ -44,7 +44,7 @@ export const SEO_ROUTES = [
     path: "/contact",
     title: "Contact",
     description:
-      "Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney.",
+      "Apply for a Smartdial Solutions Founding Client Pilot — B2B appointment setting and qualified sales opportunities for service companies across Australia.",
   },
   {
     path: "/privacy",
@@ -54,6 +54,6 @@ export const SEO_ROUTES = [
   {
     path: "/terms",
     title: "Terms of Service",
-    description: "The terms that apply when you engage Smartdial Solutions for commercial cleaning lead generation.",
+    description: "The terms that apply when you engage Smartdial Solutions for B2B appointment setting and lead generation.",
   },
 ];

@@ -7,16 +7,13 @@ import Tilt3D from "../components/Tilt3D.jsx";
 import Float from "../components/Float.jsx";
 import Mini3D from "../components/Mini3D.jsx";
 import { SITE } from "../data/site.js";
-import { BUNDLES, HYBRID_PACKAGE } from "../data/pricing.js";
-import { VA_PLANS } from "../data/virtualAssistants.js";
 
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${SITE.email}`;
 
 const INTEREST_OPTIONS = [
   { value: "", label: "Not sure yet" },
-  ...BUNDLES.map((b) => ({ value: b.id, label: `Lead Gen — ${b.name} (${b.leads} leads, $${b.total})` })),
-  ...VA_PLANS.map((p) => ({ value: p.id, label: `Virtual Assistant — ${p.name}` })),
-  { value: HYBRID_PACKAGE.id, label: `${HYBRID_PACKAGE.name} (Lead Gen + VA)` },
+  { value: "founding-pilot", label: "SmartDial Appointment Engine (Founding Pilot)" },
+  { value: "virtual-assistant", label: "Dedicated Virtual Assistant" },
 ];
 
 function Field({ label, error, children, hint }) {
@@ -46,13 +43,18 @@ const inputClasses =
 
 export default function Contact() {
   const [params] = useSearchParams();
-  const initialInterest = params.get("bundle") ?? params.get("interest") ?? "";
+  const initialInterest = params.get("interest") ?? "";
 
   const [values, setValues] = useState({
     name: "",
-    company: "",
-    phone: "",
+    businessName: "",
     email: "",
+    phone: "",
+    website: "",
+    industry: "",
+    serviceArea: "",
+    customerValue: "",
+    targetCustomers: "",
     interest: INTEREST_OPTIONS.some((o) => o.value === initialInterest) ? initialInterest : "",
     message: "",
   });
@@ -66,9 +68,10 @@ export default function Contact() {
   function validate() {
     const next = {};
     if (!values.name.trim()) next.name = "Please enter your name.";
+    if (!values.businessName.trim()) next.businessName = "Please enter your business name.";
     if (!values.phone.trim()) next.phone = "Please enter a phone number.";
     if (!values.email.trim()) {
-      next.email = "Please enter your email.";
+      next.email = "Please enter your business email.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
       next.email = "That doesn't look like a valid email.";
     }
@@ -88,12 +91,17 @@ export default function Contact() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: values.name,
-          company: values.company,
-          phone: values.phone,
+          business_name: values.businessName,
           email: values.email,
+          phone: values.phone,
+          website: values.website,
+          industry: values.industry,
+          service_area: values.serviceArea,
+          typical_customer_value: values.customerValue,
+          target_customers: values.targetCustomers,
           interested_in: interestLabel,
           message: values.message,
-          _subject: "New lead from Smartdial Solutions website",
+          _subject: "New enquiry from Smartdial Solutions website",
         }),
       });
       if (!res.ok) throw new Error("Request failed");
@@ -107,7 +115,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact"
-        description="Get in touch with Smartdial Solutions to start receiving qualified commercial cleaning leads Australia-wide, with dedicated coverage in Melbourne and Sydney."
+        description="Apply for a Smartdial Solutions Founding Client Pilot — B2B appointment setting and qualified sales opportunities for service companies across Australia."
       />
 
       <section className="relative overflow-hidden">
@@ -117,11 +125,11 @@ export default function Contact() {
           <Reveal>
             <p className="eyebrow">Contact</p>
             <h1 className="mt-4 text-balance font-display text-4xl font-extrabold text-ink sm:text-5xl">
-              Let&rsquo;s fill your calendar
+              Let&rsquo;s build your pipeline
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-lg text-ink-muted">
-              Whether it's Lead Gen, a Dedicated Virtual Assistant, or both, tell us what you need
-              and we&rsquo;ll get back to you within 1 business day.
+              Whether it&rsquo;s the Founding Pilot, a Dedicated Virtual Assistant, or both, tell
+              us what you need and we&rsquo;ll get back to you within 1 business day.
             </p>
           </Reveal>
         </div>
@@ -194,11 +202,11 @@ export default function Contact() {
                             className={inputClasses}
                           />
                         </Field>
-                        <Field label="Company">
+                        <Field label="Business name" error={errors.businessName}>
                           <input
                             type="text"
-                            value={values.company}
-                            onChange={(e) => update("company", e.target.value)}
+                            value={values.businessName}
+                            onChange={(e) => update("businessName", e.target.value)}
                             autoComplete="organization"
                             className={inputClasses}
                           />
@@ -206,6 +214,15 @@ export default function Contact() {
                       </RevealItem>
 
                       <RevealItem className="grid gap-6 sm:grid-cols-2">
+                        <Field label="Business email" error={errors.email}>
+                          <input
+                            type="email"
+                            value={values.email}
+                            onChange={(e) => update("email", e.target.value)}
+                            autoComplete="email"
+                            className={inputClasses}
+                          />
+                        </Field>
                         <Field label="Phone" error={errors.phone}>
                           <input
                             type="tel"
@@ -215,12 +232,46 @@ export default function Contact() {
                             className={inputClasses}
                           />
                         </Field>
-                        <Field label="Email" error={errors.email}>
+                      </RevealItem>
+
+                      <RevealItem className="grid gap-6 sm:grid-cols-2">
+                        <Field label="Website" hint="Optional">
                           <input
-                            type="email"
-                            value={values.email}
-                            onChange={(e) => update("email", e.target.value)}
-                            autoComplete="email"
+                            type="text"
+                            value={values.website}
+                            onChange={(e) => update("website", e.target.value)}
+                            autoComplete="url"
+                            placeholder="yourbusiness.com.au"
+                            className={inputClasses}
+                          />
+                        </Field>
+                        <Field label="Industry" hint="e.g. commercial cleaning, security, pest control">
+                          <input
+                            type="text"
+                            value={values.industry}
+                            onChange={(e) => update("industry", e.target.value)}
+                            className={inputClasses}
+                          />
+                        </Field>
+                      </RevealItem>
+
+                      <RevealItem className="grid gap-6 sm:grid-cols-2">
+                        <Field label="Service area" hint="e.g. Melbourne, Sydney, Australia-wide">
+                          <input
+                            type="text"
+                            value={values.serviceArea}
+                            onChange={(e) => update("serviceArea", e.target.value)}
+                            className={inputClasses}
+                          />
+                        </Field>
+                        <Field
+                          label="Approx. value of a typical new customer"
+                          hint="Optional — helps us gauge fit"
+                        >
+                          <input
+                            type="text"
+                            value={values.customerValue}
+                            onChange={(e) => update("customerValue", e.target.value)}
                             className={inputClasses}
                           />
                         </Field>
@@ -243,7 +294,18 @@ export default function Contact() {
                       </RevealItem>
 
                       <RevealItem>
-                        <Field label="Message" hint="Optional — service area, crew size, whatever's useful.">
+                        <Field label="What type of customers are you trying to win?">
+                          <textarea
+                            rows={3}
+                            value={values.targetCustomers}
+                            onChange={(e) => update("targetCustomers", e.target.value)}
+                            className={inputClasses}
+                          />
+                        </Field>
+                      </RevealItem>
+
+                      <RevealItem>
+                        <Field label="Message" hint="Optional — anything else that's useful.">
                           <textarea
                             rows={4}
                             value={values.message}

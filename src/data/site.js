@@ -17,7 +17,7 @@ export const NAV_LINKS = [
 ];
 
 export const SERVICES_MENU = [
-  { to: "/lead-generation", label: "Cold Calling & Lead Gen" },
+  { to: "/lead-generation", label: "B2B Appointment Setting" },
   { to: "/hire-virtual-assistant", label: "Dedicated Virtual Assistants" },
-  { to: "/#packages", label: "Complete Growth Package (Bundle)" },
+  { to: "/pricing", label: "SmartDial Appointment Engine (Pilot)" },
 ];

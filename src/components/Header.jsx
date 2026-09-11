@@ -132,7 +132,7 @@ export default function Header() {
           </a>
           <Magnetic strength={0.25}>
             <Link to="/pricing" className="btn-accent !px-5 !py-2.5 text-xs whitespace-nowrap">
-              Get Leads
+              Start a Founding Pilot
             </Link>
           </Magnetic>
         </div>
@@ -215,7 +215,7 @@ export default function Header() {
                 {SITE.phone}
               </a>
               <Link to="/pricing" className="btn-accent mt-2 justify-center">
-                Get Leads
+                Start a Founding Pilot
               </Link>
             </div>
           </motion.nav>
